@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/models/question_model/Question.dart';
+import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
 
+import '../../main.dart';
 import '../../utils/widgets/student/question_card.dart';
+import 'add_question.dart';
 
 class HomeScreenStudent extends StatefulWidget {
   const HomeScreenStudent({super.key});
@@ -265,6 +268,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
 
   @override
   Widget build(BuildContext context) {
+    mq = MediaQuery.of(context).size;
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
@@ -284,17 +288,25 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                   Row(
                     children: [
                       IconButton(
-                        icon :Icon(Icons.search,
+                        icon: Icon(
+                          Icons.search,
                           size: 32,
-                          color: AppColors.theme['fontColor'],), onPressed: () {  },
+                          color: AppColors.theme['fontColor'],
+                        ),
+                        onPressed: () {},
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       IconButton(
-                        icon :Icon(Icons.add,
-                        size: 32,
-                        color: AppColors.theme['fontColor'],), onPressed: () {  },
+                        icon: Icon(
+                          Icons.add,
+                          size: 32,
+                          color: AppColors.theme['fontColor'],
+                        ),
+                        onPressed: () {
+                          Navigator.push(context, LeftToRight(AddQuesion()));
+                        },
                       )
                     ],
                   ),
@@ -302,24 +314,59 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
               ),
             ),
             body: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Row(
-                      children: dummyquestions.map((question) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                          child: QuestionCard(
-                            question: question,
-                          ),
-                        );
-                      }).toList(),
-                    ),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  children: dummyquestions.map((question) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                      child: QuestionCard(
+                        question: question,
+                        width: 300,
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+              child: Text(
+                "Related Questions",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.theme['fontColor'],
+                  fontSize: 21,
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    children: dummyquestions.map((question) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                        child: QuestionCard(
+                          question: question,
+                          width: mq.width * 1,
+                        ),
+                      );
+                    }).toList(),
                   ),
-                )
-              ],
-            )));
+                ),
+              ),
+            ),
+          ],
+        ),
+
+
+
+    ));
   }
 }

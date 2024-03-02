@@ -6,7 +6,9 @@ import '../../colors.dart';
 
 class QuestionCard extends StatefulWidget {
   final Question question;
-  const QuestionCard({super.key, required this.question});
+  final double width;
+
+  const QuestionCard({super.key, required this.question, required this.width});
 
   @override
   State<QuestionCard> createState() => _QuestionCardState();
@@ -19,7 +21,7 @@ class _QuestionCardState extends State<QuestionCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 10),
       child: Container(
-        width: 300,
+        width: widget.width,
         height: 170,
         decoration: BoxDecoration(
           color: AppColors.theme['secondaryColor'].withOpacity(0.4),
