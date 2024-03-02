@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ingenious_5/auth/set_password.dart';
+
+import 'package:ingenious_5/screens/auth/set_password.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:pinput/pinput.dart';
+import '../../transitions/right_left.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
-import '../transitions/right_left.dart';
-import '../utils/widgets/text_field/custom_text_field.dart';
+import '../../utils/widgets/text_field/custom_text_field.dart';
 import 'login_screen.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -191,8 +192,6 @@ class _OtpScreenState extends State<OtpScreen> {
                                 ? AuthButton(
                               onpressed: () {
                                 if (isPinFilled) {
-
-
                                   // todo : enter here verify option here
                                   Navigator.pushReplacement(context, LeftToRight(SetPassword()));
 

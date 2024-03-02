@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../main.dart';
-import '../utils/colors.dart';
-import '../utils/widgets/buttons/auth_button.dart';
-import '../utils/widgets/text_field/custom_text_field.dart';
+import '../../main.dart';
+import '../../utils/colors.dart';
+import '../../utils/widgets/buttons/auth_button.dart';
+import '../../utils/widgets/text_field/custom_text_field.dart';
+
 
 class BasicInfo extends StatefulWidget {
   const BasicInfo({Key? key});
@@ -340,7 +341,7 @@ class _BasicInfoState extends State<BasicInfo> {
 
                                         //todo:handle register button
                                         //todo: for accesing name user _nameController
-                                        //todo for accesing  interst list use "interests" list;
+                                        //todo for accesing  interst list use "interests" lsit;
 
                                         print(interests);
                                       }

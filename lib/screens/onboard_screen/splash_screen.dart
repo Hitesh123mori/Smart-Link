@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
+import '../../main.dart';
+import '../../utils/colors.dart';
 import '../auth/login_screen.dart';
-import '../main.dart';
-import '../utils/colors.dart';
+
 
 
 
