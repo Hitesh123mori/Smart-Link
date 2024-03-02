@@ -13,6 +13,12 @@ class BasicInfo extends StatefulWidget {
 }
 
 class _BasicInfoState extends State<BasicInfo> {
+
+
+  String selectedOption = "Student";
+
+  bool isStudent = true ;
+
   List<String> interests = [];
 
   List<String> dummyInterests = [
@@ -90,13 +96,7 @@ class _BasicInfoState extends State<BasicInfo> {
                   padding: const EdgeInsets.only(top: 50.0),
                   child: Column(
                     children: [
-                      Center(
-                        child: Container(
-                          child: Image.asset("assets/images/basic_info.png"),
-                          height: 250,
-                          width: 250,
-                        ),
-                      ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: Column(
@@ -111,10 +111,45 @@ class _BasicInfoState extends State<BasicInfo> {
                               ),
                             ),
                             SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: RadioListTile(
+                                    title: Text('Student'),
+                                    value: 'Student',
+                                    activeColor: AppColors.theme['primaryColor'],
+                                    groupValue: selectedOption,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedOption = value!;
+                                        isStudent = true ;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: RadioListTile(
+                                    title: Text('University'),
+                                    value: 'University',
+                                    activeColor: AppColors.theme['primaryColor'],
+                                    groupValue: selectedOption,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedOption = value!;
+                                        isStudent = false;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
                               height: 20,
                             ),
                             Text(
-                              "Name",
+                              isStudent ? "Name" :"University Name",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
@@ -122,9 +157,9 @@ class _BasicInfoState extends State<BasicInfo> {
                               height: 5,
                             ),
                             CustomTextField(
-                              hintText: 'Ex.Charles Babbage',
+                              hintText: isStudent ? 'Ex.Charles Babbage' : "xyz University",
                               isNumber: false,
-                              prefixicon: Icon(Icons.person),
+                              prefixicon: isStudent ? Icon(Icons.person): Icon(Icons.warehouse_rounded),
                               controller: _nameController,
                               obsecuretext: false,
                               validator: _validateFullName,
@@ -133,7 +168,7 @@ class _BasicInfoState extends State<BasicInfo> {
                               height: 5,
                             ),
                             Text(
-                              "Your interst",
+                              isStudent ? "Your interst" : "University Domains",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
@@ -145,7 +180,7 @@ class _BasicInfoState extends State<BasicInfo> {
                               children: [
                                 Container(
                                   child: CustomTextField(
-                                    hintText: "Type interst",
+                                    hintText: isStudent ? "Type interst" : "Enter Domain",
                                     isNumber: false,
                                     prefixicon: Icon(Icons.interests_sharp),
                                     obsecuretext: false,
@@ -237,14 +272,18 @@ class _BasicInfoState extends State<BasicInfo> {
                             SizedBox(
                               height: 10,
                             ),
+
+                            if(isStudent)
                             Text(
                               "University Code",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
+                            if(isStudent)
                             SizedBox(
                               height: 10,
                             ),
+                            if(isStudent)
                             CustomTextField(
                               hintText: 'Enter Unicode here',
                               isNumber: false,
