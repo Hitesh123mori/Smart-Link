@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/apis/FireStoreAPIs/UserProfileAPI.dart';
+import 'package:ingenious_5/transitions/left_right.dart';
 
 import '../../main.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
+import '../student/home_tabs_student.dart';
 
 
 class BasicInfo extends StatefulWidget {
@@ -353,6 +355,10 @@ class _BasicInfoState extends State<BasicInfo> {
                                         print("#res-base_info: $res");
 
                                         // todo if (res == 'ok') push to home screen
+                                        if(res=="ok"){
+                                          if(isStudent)
+                                            Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                        }
 
                                       }
                                     }
