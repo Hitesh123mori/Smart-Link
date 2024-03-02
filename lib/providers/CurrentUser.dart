@@ -17,6 +17,7 @@ class AppUserProvider extends ChangeNotifier{
     if(uid != null)
       user = AppUser.fromJson(await UserProfile.getUser(uid));
     notifyListeners();
+    print("#initUser complete");
   }
 
   Future logOut() async {

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
+import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/screens/student/home_screen_student.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
+import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
 
+import '../student/home_tabs_student.dart';
 import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -70,179 +74,191 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Form(
-        key: _formKey,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            backgroundColor: AppColors.theme['backgroundColor'],
-            body: Stack(children: [
-              Container(
-                color: AppColors.theme['backgroundColor'],
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: mq.height * 0.1,
-                      ),
-                      Image.asset(
-                        "assets/images/CampusQ.png",
-                        height: 250,
-                        width: 250,
-                      ),
-                      SizedBox(
-                        height: mq.height * 0.003,
-                      ),
-                      Text(
-                        "CampusQ",
-                        style: TextStyle(
-                            color: AppColors.theme['primaryTextColor'],
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: mq.height * 0.003,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                  bottom: 0,
-                  child: Container(
-                    height: mq.height * 0.5,
-                    width: mq.width * 1,
-                    decoration: BoxDecoration(
-                        color: AppColors.theme['primaryColor'],
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          topLeft: Radius.circular(20),
-                        )),
-                    child: SingleChildScrollView(
+    return Consumer<AppUserProvider>(
+        builder: (context,value,child){
+        return GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Form(
+            key: _formKey,
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                backgroundColor: AppColors.theme['backgroundColor'],
+                body: Stack(children: [
+                  Container(
+                    color: AppColors.theme['backgroundColor'],
+                    child: Center(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            height: mq.height * 0.02,
+                            height: mq.height * 0.1,
+                          ),
+                          Image.asset(
+                            "assets/images/CampusQ.png",
+                            height: 250,
+                            width: 250,
+                          ),
+                          SizedBox(
+                            height: mq.height * 0.003,
                           ),
                           Text(
-                            "Welcome",
+                            "CampusQ",
                             style: TextStyle(
-                                fontSize: 25,
-                                color: AppColors.theme['backgroundColor'],
+                                color: AppColors.theme['primaryTextColor'],
+                                fontSize: 32,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
-                            height: mq.height * 0.02,
+                            height: mq.height * 0.003,
                           ),
-                          Text(
-                            "Welcome back! Please enter your details.",
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: AppColors.theme['backgroundColor'],
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: mq.height * 0.02,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: CustomTextField(
-                              controller: _emailController,
-                              hintText: 'Enter your email',
-                              isNumber: false,
-                              prefixicon: Icon(Icons.mail_outline_outlined),
-                              obsecuretext: false,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: CustomTextField(
-                              controller: _passController,
-                              hintText: 'Enter your password',
-                              isNumber: false,
-                              prefixicon: Icon(Icons.password),
-                              obsecuretext: _isPasswordHidden,
-                              suffix: IconButton(
-                                icon: Icon(
-                                  _isPasswordHidden
-                                      ? (Icons.visibility_off)
-                                      : (Icons.visibility),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isPasswordHidden = !_isPasswordHidden;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: AuthButton(
-                              onpressed: isButtonEnabled
-                                  ? () async {
-                                      FocusScope.of(context).unfocus();
-
-                                      //todo:enter your logic here
-                                      //_passController,_emailController
-                                      if (_formKey.currentState!.validate()) {
-                                        final res = await AppFirebaseAuth.signIn(_emailController.text,_passController.text);
-                                        print("res-login: $res");
-                                        // if(res == 'Logged In') push to home screen;
-                                      }
-
-                                    }
-                                  : () {
-                                      FocusScope.of(context).unfocus();
-                                    },
-                              name: 'Log In',
-                              bcolor: isButtonEnabled
-                                  ? AppColors.theme['fontColor']
-                                  : AppColors.theme['secondaryColor']
-                                      .withOpacity(0.4),
-                              tcolor: isButtonEnabled
-                                  ? AppColors.theme['backgroundColor']
-                                  : AppColors.theme['fontColor']
-                                      .withOpacity(0.5),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                      bottom: 0,
+                      child: Container(
+                        height: mq.height * 0.5,
+                        width: mq.width * 1,
+                        decoration: BoxDecoration(
+                            color: AppColors.theme['primaryColor'],
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20),
+                            )),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              SizedBox(
+                                height: mq.height * 0.02,
+                              ),
                               Text(
-                                "Don't have an account ?",
+                                "Welcome",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    color: AppColors.theme['backgroundColor'],
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: mq.height * 0.02,
+                              ),
+                              Text(
+                                "Welcome back! Please enter your details.",
                                 style: TextStyle(
                                     fontSize: 17,
                                     color: AppColors.theme['backgroundColor'],
                                     fontWeight: FontWeight.bold),
                               ),
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.push(context, LeftToRight(OtpScreen()));
+                              SizedBox(
+                                height: mq.height * 0.02,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: CustomTextField(
+                                  controller: _emailController,
+                                  hintText: 'Enter your email',
+                                  isNumber: false,
+                                  prefixicon: Icon(Icons.mail_outline_outlined),
+                                  obsecuretext: false,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: CustomTextField(
+                                  controller: _passController,
+                                  hintText: 'Enter your password',
+                                  isNumber: false,
+                                  prefixicon: Icon(Icons.password),
+                                  obsecuretext: _isPasswordHidden,
+                                  suffix: IconButton(
+                                    icon: Icon(
+                                      _isPasswordHidden
+                                          ? (Icons.visibility_off)
+                                          : (Icons.visibility),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _isPasswordHidden = !_isPasswordHidden;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                child: AuthButton(
+                                  onpressed: isButtonEnabled
+                                      ? () async {
+                                    FocusScope.of(context).unfocus();
+
+                                    //todo:enter your logic here
+                                    //_passController,_emailController
+                                    if (_formKey.currentState!.validate()) {
+                                      final res = await AppFirebaseAuth.signIn(_emailController.text,_passController.text);
+                                      print("res-login: $res");
+                                      // if(res == 'Logged In') push to home screen;
+
+                                       await value.initUser();
+
+                                      if(res=="Logged In"){
+                                        if(value.user?.type=="S"){
+                                          print("#navigate");
+                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                        }
+                                      }
+                                    }
+
+                                  }
+                                      : () {
+                                    FocusScope.of(context).unfocus();
                                   },
-                                  child: Text(
-                                    "Register",
+                                  name: 'Log In',
+                                  bcolor: isButtonEnabled
+                                      ? AppColors.theme['fontColor']
+                                      : AppColors.theme['secondaryColor']
+                                      .withOpacity(0.4),
+                                  tcolor: isButtonEnabled
+                                      ? AppColors.theme['backgroundColor']
+                                      : AppColors.theme['fontColor']
+                                      .withOpacity(0.5),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Don't have an account ?",
                                     style: TextStyle(
                                         fontSize: 17,
-                                        color: AppColors.theme['fontColor'],
+                                        color: AppColors.theme['backgroundColor'],
                                         fontWeight: FontWeight.bold),
-                                  ))
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.push(context, LeftToRight(OtpScreen()));
+                                      },
+                                      child: Text(
+                                        "Register",
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            color: AppColors.theme['fontColor'],
+                                            fontWeight: FontWeight.bold),
+                                      ))
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ))
-            ]),
+                          ),
+                        ),
+                      ))
+                ]),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        );
+    });
   }
 }
