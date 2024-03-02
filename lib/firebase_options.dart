@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '368515858457',
     projectId: 'ingenious-5',
     authDomain: 'ingenious-5.firebaseapp.com',
+    databaseURL: 'https://ingenious-5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'ingenious-5.appspot.com',
   );
 
@@ -57,6 +58,7 @@ class DefaultFirebaseOptions {
     appId: '1:368515858457:android:f33688440d558736deea88',
     messagingSenderId: '368515858457',
     projectId: 'ingenious-5',
+    databaseURL: 'https://ingenious-5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'ingenious-5.appspot.com',
   );
 
@@ -65,6 +67,7 @@ class DefaultFirebaseOptions {
     appId: '1:368515858457:ios:c30ca20ee64e6a3bdeea88',
     messagingSenderId: '368515858457',
     projectId: 'ingenious-5',
+    databaseURL: 'https://ingenious-5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'ingenious-5.appspot.com',
     iosBundleId: 'com.example.ingenious5',
   );
@@ -74,6 +77,7 @@ class DefaultFirebaseOptions {
     appId: '1:368515858457:ios:4069e372fdecc119deea88',
     messagingSenderId: '368515858457',
     projectId: 'ingenious-5',
+    databaseURL: 'https://ingenious-5-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'ingenious-5.appspot.com',
     iosBundleId: 'com.example.ingenious5.RunnerTests',
   );
