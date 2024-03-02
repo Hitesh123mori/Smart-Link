@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ingenious_5/transitions/left_right.dart';
+import '../auth/login_screen.dart';
 import '../main.dart';
-import '../transitions/right_left.dart';
 import '../utils/colors.dart';
-import 'onboarding_screen.dart';
 
 
 
@@ -27,7 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
         systemNavigationBarIconBrightness: Brightness.dark,
       ));
 
-      Navigator.pushReplacement(context, RightToLeft(OnboardingScreen()));
+      // Navigator.pushReplacement(context, RightToLeft(OnboardingScreen()));
+      Navigator.pushReplacement(context, LeftToRight(LoginScreen()));
     });
   }
 
@@ -43,30 +44,30 @@ class _SplashScreenState extends State<SplashScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Image.asset(
-                  //   "assets/images/csi_logo.png",
-                  //   height: 200,
-                  //   width: 200,
-                  // ),
+                  Image.asset(
+                    "assets/images/CampusQ.png",
+                    height: 200,
+                    width: 200,
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: mq.width * 0.2),
                     child: Text(
-                      "Nirma University",
+                      "CampusQ",
                       style: TextStyle(
-                          color: AppColors.theme['secondaryColor'],
-                          fontSize:25),
+                          color: AppColors.theme['fontColor'],
+                          fontSize:25,fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: mq.width * 0.2),
                     child: Text(
-                      "Student Chapter",
+                      "Doubt no more!",
                       style: TextStyle(
-                          color: AppColors.theme['secondaryColor'],
-                          fontSize: 25),
+                          color: AppColors.theme['primaryColor'],
+                          fontSize: 25,fontWeight:FontWeight.bold),
                     ),
                   )
                 ]),

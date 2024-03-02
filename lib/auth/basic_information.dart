@@ -13,14 +13,20 @@ class BasicInfo extends StatefulWidget {
 }
 
 class _BasicInfoState extends State<BasicInfo> {
-
-
   String selectedOption = "Student";
 
-  bool isStudent = true ;
+  bool isStudent = true;
+  bool isTeacher = false;
+  bool isInstitute = false;
 
+  // all three user common fields
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _addContoller = TextEditingController();
+  TextEditingController _pincodeController = TextEditingController();
+
+  // student  adn teacher common fields
+  TextEditingController interestController = TextEditingController();
   List<String> interests = [];
-
   List<String> dummyInterests = [
     "Mathematics",
     "Physics",
@@ -29,11 +35,7 @@ class _BasicInfoState extends State<BasicInfo> {
     "History",
     "Literature"
   ];
-
   List<String> suggestedInterests = [];
-
-  TextEditingController interestController = TextEditingController();
-  TextEditingController unicodeController = TextEditingController();
 
   void suggestInterests(String userInput) {
     suggestedInterests = dummyInterests
@@ -43,40 +45,42 @@ class _BasicInfoState extends State<BasicInfo> {
     setState(() {});
   }
 
-  TextEditingController _nameController = TextEditingController();
-
+  // form key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  //button disable
   bool isButtonEnabled = false;
 
   @override
   void initState() {
     super.initState();
     _nameController.addListener(updateButtonState);
-    ;
+    _addContoller.addListener(updateButtonState);
+    _pincodeController.addListener(updateButtonState);
   }
 
   void updateButtonState() {
     setState(() {
-      isButtonEnabled = _nameController.text.isNotEmpty;
+      isButtonEnabled = _nameController.text.isNotEmpty &&
+          _addContoller.text.isNotEmpty &&
+          _pincodeController.text.isNotEmpty;
     });
   }
 
   @override
   void dispose() {
     _nameController.removeListener(updateButtonState);
-
+    _addContoller.removeListener(updateButtonState);
+    _pincodeController.removeListener(updateButtonState);
     super.dispose();
   }
 
-  String? _validateFullName(String? value) {
+  String? _validate(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your full name';
+      return 'Please enter details';
     }
     return null;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -113,35 +117,49 @@ class _BasicInfoState extends State<BasicInfo> {
                             SizedBox(
                               height: 10,
                             ),
-                            Row(
+                            Column(
                               children: [
-                                Expanded(
-                                  child: RadioListTile(
-                                    title: Text('Student'),
-                                    value: 'Student',
-                                    activeColor: AppColors.theme['primaryColor'],
-                                    groupValue: selectedOption,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedOption = value!;
-                                        isStudent = true ;
-                                      });
-                                    },
-                                  ),
+                                RadioListTile(
+                                  title: Text('Student'),
+                                  value: 'Student',
+                                  activeColor: AppColors.theme['primaryColor'],
+                                  groupValue: selectedOption,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedOption = value!;
+                                      isStudent = true;
+                                      isInstitute  =false;
+                                      isTeacher = false;
+                                    });
+                                  },
                                 ),
-                                Expanded(
-                                  child: RadioListTile(
-                                    title: Text('University'),
-                                    value: 'University',
-                                    activeColor: AppColors.theme['primaryColor'],
-                                    groupValue: selectedOption,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectedOption = value!;
-                                        isStudent = false;
-                                      });
-                                    },
-                                  ),
+                                RadioListTile(
+                                  title: Text('Teacher/tutor'),
+                                  value: 'Teacher/tutor',
+                                  activeColor: AppColors.theme['primaryColor'],
+                                  groupValue: selectedOption,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedOption = value!;
+                                      isTeacher= true;
+                                      isInstitute= false;
+                                      isStudent = false;
+                                    });
+                                  },
+                                ),
+                                RadioListTile(
+                                  title: Text('Institute'),
+                                  value: 'Institute',
+                                  activeColor: AppColors.theme['primaryColor'],
+                                  groupValue: selectedOption,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedOption = value!;
+                                      isInstitute= true;
+                                      isStudent = false;
+                                      isTeacher = false;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -149,7 +167,7 @@ class _BasicInfoState extends State<BasicInfo> {
                               height: 20,
                             ),
                             Text(
-                              isStudent ? "Name" :"University Name",
+                              "Name",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
@@ -157,30 +175,31 @@ class _BasicInfoState extends State<BasicInfo> {
                               height: 5,
                             ),
                             CustomTextField(
-                              hintText: isStudent ? 'Ex.Charles Babbage' : "xyz University",
+                              hintText:'Enter your name',
                               isNumber: false,
-                              prefixicon: isStudent ? Icon(Icons.person): Icon(Icons.warehouse_rounded),
+                              prefixicon:Icon(Icons.person),
                               controller: _nameController,
                               obsecuretext: false,
-                              validator: _validateFullName,
+                              validator: _validate,
                             ),
                             SizedBox(
                               height: 5,
                             ),
-                            Text(
-                              isStudent ? "Your interst" : "University Domains",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
+                              Text(
+                                "Your interst",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
                             SizedBox(
                               height: 5,
                             ),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
                                   child: CustomTextField(
-                                    hintText: isStudent ? "Type interst" : "Enter Domain",
+                                    hintText: "Type interst",
                                     isNumber: false,
                                     prefixicon: Icon(Icons.interests_sharp),
                                     obsecuretext: false,
@@ -196,37 +215,38 @@ class _BasicInfoState extends State<BasicInfo> {
                                     },
                                   ),
                                   height: 60,
-                                  width: mq.width*0.61,
+                                  width: mq.width * 0.61,
                                 ),
-                                SizedBox(width: mq.width*0.02,),
+                                SizedBox(
+                                  width: mq.width * 0.02,
+                                ),
                                 InkWell(
-                                    onTap: () {
-                                      String interest =
-                                      interestController.text.trim();
-                                      if (interest.isNotEmpty) {
-                                        print("doen");
-                                        setState(() {
-                                          interests.add(interest);
-                                          interestController.clear();
-                                        });
-                                      }
-                                    },
-                                    child: Container(
-                                      child: Center(
-                                          child: Text(
-                                            "Add",
-                                            style: TextStyle(
-                                                color: AppColors
-                                                    .theme['backgroundColor'],
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      height: 50,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: AppColors.theme['primaryColor']),
-                                    ),
+                                  onTap: () {
+                                    String interest =
+                                        interestController.text.trim();
+                                    if (interest.isNotEmpty) {
+                                      setState(() {
+                                        interests.add(interest);
+                                        interestController.clear();
+                                      });
+                                    }
+                                  },
+                                  child: Container(
+                                    child: Center(
+                                        child: Text(
+                                      "Add",
+                                      style: TextStyle(
+                                          color: AppColors
+                                              .theme['backgroundColor'],
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    height: 50,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: AppColors.theme['primaryColor']),
                                   ),
+                                ),
                               ],
                             ),
                             if (interestController.text.isNotEmpty)
@@ -270,40 +290,57 @@ class _BasicInfoState extends State<BasicInfo> {
                                   .toList(),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
-
-                            if(isStudent)
-                            Text(
-                              "University Code",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
-                            if(isStudent)
+                              Text(
+                                "Address",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              CustomTextField(
+                                hintText: 'Enter address here',
+                                isNumber: false,
+                                prefixicon: Icon(Icons.pin_drop),
+                                controller: _addContoller,
+                                obsecuretext: false,
+                                validator: _validate,
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Pincode",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
-                            if(isStudent)
                             CustomTextField(
-                              hintText: 'Enter Unicode here',
+                              hintText: 'Enter your area pincode',
                               isNumber: false,
-                              prefixicon: Icon(Icons.person),
-                              controller: unicodeController,
+                              prefixicon: Icon(Icons.pin_drop),
+                              controller: _pincodeController,
                               obsecuretext: false,
-                              validator: _validateFullName,
+                              validator: _validate,
                             ),
                             SizedBox(
-                              height: 20,
+                                  height: 10,
                             ),
 
+                            //todo:work here
                             AuthButton(
                               onpressed: isButtonEnabled
                                   ? () {
                                       FocusScope.of(context).unfocus();
                                       if (_formKey.currentState!.validate()) {
+
                                         //todo:handle register button
                                         //todo: for accesing name user _nameController
-                                        //todo for accesing  interst lisst use "interests";
+                                        //todo for accesing  interst list use "interests" list;
 
                                         print(interests);
                                       }
@@ -321,7 +358,6 @@ class _BasicInfoState extends State<BasicInfo> {
                                   : AppColors.theme['fontColor']
                                       .withOpacity(0.5),
                             ),
-
                             SizedBox(
                               height: 20,
                             ),

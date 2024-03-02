@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' ;
+import 'package:ingenious_5/onboard_screen/splash_screen.dart';
 
-import 'auth/login_screen.dart';
 
 late Size mq ;
 
@@ -20,7 +20,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      // home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
