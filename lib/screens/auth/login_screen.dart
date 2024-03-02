@@ -10,6 +10,7 @@ import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
 
 import '../student/home_tabs_student.dart';
+import '../teacher/home_tabs_teachers.dart';
 import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -206,9 +207,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                       if(res=="Logged In"){
                                         if(value.user?.type=="S"){
-                                          print("#navigate");
+                                          print("#navigate-student");
                                           Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
                                         }
+                                        if(value.user?.type=="T"){
+                                          print("#navigate-teacher");
+                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsTeachers()));
+                                        }
+
                                       }
                                     }
 
