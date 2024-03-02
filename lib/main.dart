@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart' ;
+import 'package:ingenious_5/onboard_screen/splash_screen.dart';
 
+
+late Size mq ;
 
 void  main(){
    runApp(MyApp());
@@ -15,6 +18,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // home: LoginScreen(),
+      home: SplashScreen(),
+    );
   }
 }
