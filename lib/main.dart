@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' ;
-import 'package:ingenious_5/onboard_screen/splash_screen.dart';
+import 'package:ingenious_5/screens/onboard_screen/splash_screen.dart';
 
 
 late Size mq ;
