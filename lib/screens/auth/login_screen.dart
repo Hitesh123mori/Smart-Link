@@ -10,7 +10,6 @@ import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
 
 import '../student/home_tabs_student.dart';
-import '../teacher/home_tabs_teachers.dart';
 import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -199,23 +198,37 @@ class _LoginScreenState extends State<LoginScreen> {
                                     //todo:enter your logic here
                                     //_passController,_emailController
                                     if (_formKey.currentState!.validate()) {
-                                      final res = await AppFirebaseAuth.signIn(_emailController.text,_passController.text);
-                                      print("res-login: $res");
-                                      // if(res == 'Logged In') push to home screen;
+                                      setState(() {
+                                        _isLoading = true;
+                                      });
 
-                                       await value.initUser();
+                                      final res = AppFirebaseAuth.signIn(_emailController.text,_passController.text);
 
-                                      if(res=="Logged In"){
-                                        if(value.user?.type=="S"){
-                                          print("#navigate-student");
-                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                      res.then((val) async {
+                                        print("res-login: $val");
+                                        await value.initUser();
+                                        HelperFunction.showToast(val);
+                                        if(val=="Logged In"){
+                                          if(value.user?.type=="S"){
+                                            print("#navigate");
+                                            Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                          }
+
+                                        }else {
+                                          setState(() {
+                                            _isLoading = false;
+                                          });
                                         }
-                                        if(value.user?.type=="T"){
-                                          print("#navigate-teacher");
-                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsTeachers()));
-                                        }
+                                        return null;
+                                      }).onError((error, stackTrace) {
+                                        print("#res-error: $error, $stackTrace");
 
-                                      }
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                      });
+
+
                                     }
 
                                   }
