@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart' ;
 import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/screens/Institute/home_tab_institute.dart';
 import 'package:ingenious_5/screens/onboard_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: LoginScreen(),
-      home: SplashScreen(),
+      home: HomeTabsInstitute(),
     );
   }
 }
