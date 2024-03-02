@@ -1,3 +1,4 @@
+import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ingenious_5/screens/auth/set_password.dart';
@@ -17,7 +18,7 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -25,6 +26,7 @@ class _OtpScreenState extends State<OtpScreen> {
   bool enablePinput = false;
   bool isButtonClicked = false;
   bool isPinFilled = false;
+  var _pin;
 
   @override
   void initState() {
@@ -182,7 +184,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                     isPinFilled = true;
                                     updateButtonState();
                                   });
-                                  print(pin);
+                                  print("#pinToBeVerify: ${pin}");
+                                  _pin = pin;
                                 },
                               ),
                             SizedBox(
@@ -193,7 +196,11 @@ class _OtpScreenState extends State<OtpScreen> {
                               onpressed: () {
                                 if (isPinFilled) {
                                   // todo : enter here verify option here
-                                  Navigator.pushReplacement(context, LeftToRight(SetPassword()));
+                                  bool res = AppFirebaseAuth.verifyOTP(_pin);
+                                  print("opt-verification: $res");
+                                  if(res) {
+                                    Navigator.pushReplacement(context, LeftToRight(SetPassword(email: _emailController.text,)));
+                                  }
 
                                 }
                               },
@@ -208,7 +215,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                   .withOpacity(0.5),
                             )
                                 : AuthButton(
-                              onpressed: () {
+                              onpressed: () async {
                                 if (isButtonEnabled) {
                                   FocusScope.of(context).unfocus();
                                   if (_formKey.currentState!.validate()) {
@@ -217,7 +224,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                       enablePinput = true;
                                     });
 
-
+                                    final res = await AppFirebaseAuth.sendOTP(_emailController.text);
+                                    print("#res sent-opt: $res");
 
                                     //todo : enter get otp logic here
                                   }
@@ -243,10 +251,11 @@ class _OtpScreenState extends State<OtpScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               TextButton(
-                                onPressed: () {
+                                onPressed: () async {
 
                                   //todo:enter here resend otp logic
-
+                                  final res = await AppFirebaseAuth.sendOTP(_emailController.text);
+                                  print("#res resent-opt: $res");
 
                                 },
                                 child: Text(

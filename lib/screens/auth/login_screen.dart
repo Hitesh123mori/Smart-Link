@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
 import '../../main.dart';
@@ -185,12 +186,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: AuthButton(
                               onpressed: isButtonEnabled
-                                  ? () {
+                                  ? () async {
                                       FocusScope.of(context).unfocus();
 
                                       //todo:enter your logic here
                                       //_passController,_emailController
-                                      if (_formKey.currentState!.validate()) {}
+                                      if (_formKey.currentState!.validate()) {
+                                        final res = await AppFirebaseAuth.signIn(_emailController.text,_passController.text);
+                                        print("res-login: $res");
+                                        // if(res == 'Logged In') push to home screen;
+                                      }
+
                                     }
                                   : () {
                                       FocusScope.of(context).unfocus();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
@@ -6,7 +7,8 @@ import '../../utils/widgets/text_field/custom_text_field.dart';
 import 'basic_information.dart';
 
 class SetPassword extends StatefulWidget {
-  const SetPassword({Key? key}) : super(key: key);
+  final String email;
+  const SetPassword({required this.email, Key? key}) : super(key: key);
 
   @override
   State<SetPassword> createState() => _SetPasswordState();
@@ -176,12 +178,16 @@ class _SetPasswordState extends State<SetPassword> {
                             ),
                             AuthButton(
                               onpressed: isButtonEnabled
-                                  ? () {
+                                  ? () async {
                                 FocusScope.of(context).unfocus();
                                 if (_formKey.currentState!.validate()) {
 
                                   //todo:enter set password line
-                                  Navigator.pushReplacement(context, LeftToRight(BasicInfo()));
+                                  final res = await AppFirebaseAuth.signUp(widget.email, _passController.text);
+                                  print("#res registration: $res");
+                                  if(res == "Registered") {
+                                    Navigator.pushReplacement(context, LeftToRight(BasicInfo()));
+                                  }
 
                                 }
                               }
