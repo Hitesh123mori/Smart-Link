@@ -54,6 +54,7 @@ class _BasicInfoState extends State<BasicInfo> {
 
   //button disable
   bool isButtonEnabled = false;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -336,12 +337,16 @@ class _BasicInfoState extends State<BasicInfo> {
                             ),
 
                             //todo:work here
-                            AuthButton(
+                            isLoading
+                                ? const CircularProgressIndicator()
+                                :AuthButton(
                               onpressed: isButtonEnabled
                                   ? () async {
                                       FocusScope.of(context).unfocus();
                                       if (_formKey.currentState!.validate()) {
-
+                                          setState(() {
+                                            isLoading = true;
+                                          });
 
                                         print(interests);
                                         var type;
@@ -349,16 +354,27 @@ class _BasicInfoState extends State<BasicInfo> {
                                         else if (isInstitute) type = "I";
                                         else type = "T";
 
-                                        final res = await UserProfile.signupUser(name: _nameController.text,
+                                        final res = UserProfile.signupUser(name: _nameController.text,
                                             interest: interests, type: type, pincode: _pincodeController.text, address: _addContoller.text);
 
-                                        print("#res-base_info: $res");
-
-                                        // todo if (res == 'ok') push to home screen
+                                        res.then((value) {
+                                          print("#res-base_info: $res");
+                                          // todo if (res == 'ok') push to home screen
                                         if(res=="ok"){
                                           if(isStudent)
                                             Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
                                         }
+
+                                          return null;
+                                        }).onError((error, stackTrace) {
+
+                                          isLoading = false;
+                                          setState(() {});
+                                          return null;
+                                        })
+                                          ;
+
+
 
                                       }
                                     }
