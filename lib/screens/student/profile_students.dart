@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/screens/auth/login_screen.dart';
+import 'package:ingenious_5/transitions/right_left.dart';
 import 'package:ingenious_5/utils/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -15,23 +17,36 @@ class ProfileStudent extends StatefulWidget {
 class _ProfileStudentState extends State<ProfileStudent> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: AppColors.theme['backgroundColor'],
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Your Profile",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: AppColors.theme['backgroundColor'],
-                fontSize: 20),
+    return Consumer<AppUserProvider>(builder: (context, value, child) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: AppColors.theme['backgroundColor'],
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "Your Profile",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.theme['backgroundColor'],
+                  fontSize: 20),
+            ),
+            backgroundColor: AppColors.theme['primaryColor'],
           ),
-          backgroundColor: AppColors.theme['primaryColor'],
-        ),
-        body: Consumer<AppUserProvider>(builder: (context, value, child) {
-          return Padding(
+          floatingActionButton: FloatingActionButton(
+            child: Icon(
+              Icons.logout,
+              color: AppColors.theme['backgroundColor'],
+            ),
+            onPressed: () async {
+              await value.logOut().then((_){
+                  Navigator.pushReplacement(context, RightToLeft(LoginScreen()));
+                  // value.user  = null ;
+              });
+            },
+            backgroundColor: AppColors.theme['primaryColor'],
+          ),
+          body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
             child: Column(
               children: [
@@ -125,20 +140,20 @@ class _ProfileStudentState extends State<ProfileStudent> {
                         children: value.user!.interest!
                             .map(
                               (interest) => Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 3.0,vertical: 3),
-                            child: Chip(
-                              backgroundColor:
-                              AppColors.theme['secondaryColor'],
-                              label: Text(interest),
-                              onDeleted: () {
-                                setState(() {
-                                  value.user!.interest!.remove(interest);
-                                });
-                              },
-                            ),
-                          ),
-                        )
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 3.0, vertical: 3),
+                                child: Chip(
+                                  backgroundColor:
+                                      AppColors.theme['secondaryColor'],
+                                  label: Text(interest),
+                                  onDeleted: () {
+                                    setState(() {
+                                      value.user!.interest!.remove(interest);
+                                    });
+                                  },
+                                ),
+                              ),
+                            )
                             .toList(),
                       ),
                     ],
@@ -146,9 +161,9 @@ class _ProfileStudentState extends State<ProfileStudent> {
                 )
               ],
             ),
-          );
-        }),
-      ),
-    );
+          ),
+        ),
+      );
+    });
   }
 }

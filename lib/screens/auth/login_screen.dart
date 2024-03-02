@@ -4,13 +4,13 @@ import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/screens/student/home_screen_student.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
-import 'package:ingenious_5/utils/helper_functions/HelperFunction.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
 
 import '../student/home_tabs_student.dart';
+import '../teacher/home_tabs_teachers.dart';
 import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -27,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isButtonEnabled = false;
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -192,11 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                                child: _isLoading
-                                    ? CircularProgressIndicator(
-                                    color: AppColors.theme["fontColor"],
-                                )
-                                    : AuthButton(
+                                child: AuthButton(
                                   onpressed: isButtonEnabled
                                       ? () async {
                                     FocusScope.of(context).unfocus();
@@ -204,37 +199,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                     //todo:enter your logic here
                                     //_passController,_emailController
                                     if (_formKey.currentState!.validate()) {
-                                      setState(() {
-                                        _isLoading = true;
-                                      });
+                                      final res = await AppFirebaseAuth.signIn(_emailController.text,_passController.text);
+                                      print("res-login: $res");
+                                      // if(res == 'Logged In') push to home screen;
 
-                                      final res = AppFirebaseAuth.signIn(_emailController.text,_passController.text);
+                                       await value.initUser();
 
-                                      res.then((val) async {
-                                        print("res-login: $val");
-                                        await value.initUser();
-                                        HelperFunction.showToast(val);
-                                        if(val=="Logged In"){
-                                          if(value.user?.type=="S"){
-                                            print("#navigate");
-                                            Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
-                                          }
-
-                                        }else {
-                                          setState(() {
-                                            _isLoading = false;
-                                          });
+                                      if(res=="Logged In"){
+                                        if(value.user?.type=="S"){
+                                          print("#navigate-student");
+                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
                                         }
-                                        return null;
-                                      }).onError((error, stackTrace) {
-                                        print("#res-error: $error, $stackTrace");
+                                        if(value.user?.type=="T"){
+                                          print("#navigate-teacher");
+                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsTeachers()));
+                                        }
 
-                                        setState(() {
-                                          _isLoading = false;
-                                        });
-                                      });
-
-
+                                      }
                                     }
 
                                   }
