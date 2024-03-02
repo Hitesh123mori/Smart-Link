@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FireStoreAPIs/InterestAPIs.dart';
 import 'package:ingenious_5/apis/FireStoreAPIs/UserProfileAPI.dart';
 import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
@@ -35,7 +36,7 @@ class _BasicInfoState extends State<BasicInfo> {
   // student  and teacher common fields
   TextEditingController interestController = TextEditingController();
   List<String> interests = [];
-  List<String> dummyInterests = ["Mathematics", "Physics", "Biology", "Computer Science", "History", "Literature"];
+  List<String> dummyInterests = [];
   List<String> suggestedInterests = [];
 
   void suggestInterests(String userInput) {
@@ -50,12 +51,18 @@ class _BasicInfoState extends State<BasicInfo> {
   bool isButtonEnabled = false;
   bool isLoading = false;
 
+  Future getInterest() async {
+    dummyInterests = await InterestAPIs.getInterests();
+  }
+
+
   @override
   void initState() {
     super.initState();
     _nameController.addListener(updateButtonState);
     _addContoller.addListener(updateButtonState);
     _pincodeController.addListener(updateButtonState);
+    getInterest();
   }
 
   void updateButtonState() {
@@ -217,7 +224,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                     width: mq.width * 0.02,
                                   ),
                                   InkWell(
-                                    onTap: () {
+                                    onTap: () async {
                                       String interest = interestController.text.trim();
                                       if (interest.isNotEmpty) {
                                         setState(() {
@@ -225,6 +232,9 @@ class _BasicInfoState extends State<BasicInfo> {
                                           interestController.clear();
                                         });
                                       }
+
+                                      await InterestAPIs.addInterest(interest);
+
                                     },
                                     child: Container(
                                       child: Center(
@@ -247,7 +257,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                     itemBuilder: (context, index) {
                                       return ListTile(
                                         title: Text(suggestedInterests[index]),
-                                        onTap: () {
+                                        onTap: () async {
                                           setState(() {
                                             interests.add(suggestedInterests[index]);
                                             interestController.clear();

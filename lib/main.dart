@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart' ;
+import 'package:ingenious_5/apis/FireStoreAPIs/InterestAPIs.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/screens/Institute/home_screen_institute.dart';
+import 'package:ingenious_5/screens/Institute/home_tab_institute.dart';
 import 'package:ingenious_5/screens/onboard_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -29,10 +32,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: LoginScreen(),
       home: SplashScreen(),
+      // home: HomeTabsInstitute(),
     );
   }
 }
