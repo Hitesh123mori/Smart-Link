@@ -12,8 +12,9 @@ class AppUser {
     this.institute,
     this.staredList,
     this.notificationPushToken,
-    this.rating
-  });
+  }){
+    rating = 0;
+  }
 
   AppUser.fromJson(dynamic json) {
     userId = json['userId'];
