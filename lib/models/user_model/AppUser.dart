@@ -10,6 +10,7 @@ class AppUser {
     this.qualification,
     this.vacancy,
     this.institute,
+    this.staredList,
     this.notificationPushToken,
   });
 
@@ -22,6 +23,7 @@ class AppUser {
     type = json['type'];
     interest = json['interest'] != null ? json['interest'].cast<String>() : [];
     qualification = json['qualification'] != null ? json['qualification'].cast<String>() : [];
+    staredList = json['staredList'] != null ? json['staredList'].cast<String>() : [];
     vacancy = json['vacancy'] != null ? Vacancy.fromJson(json['vacancy']) : null;
     institute = json['institute'];
     notificationPushToken = json['notificationPushToken'];
@@ -34,6 +36,7 @@ class AppUser {
   String? type;
   List<String>? interest;
   List<String>? qualification;
+  List<String>? staredList;
   Vacancy? vacancy;
   String? institute;
   String? notificationPushToken;
@@ -52,6 +55,7 @@ class AppUser {
       map['vacancy'] = vacancy?.toJson();
     }
     map['institute'] = institute;
+    map['staredList'] = staredList;
     map['notificationPushToken'] = notificationPushToken;
     return map;
   }

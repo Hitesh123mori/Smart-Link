@@ -13,23 +13,8 @@ class QuestionAPIs{
   }
 
   /// Question stream for stream builder
-  static Future getQuestions({String? filterBy, String? filterVal, bool? isGlobal}) async {
-    if (filterBy != null && filterVal != null){
-      final data = await _nodeRef.child("questions").orderByChild(filterBy.toString()).equalTo(filterVal.toString()).get();
-      print("#data: ${data.value}");
-      Map<dynamic, dynamic> map = data.value as Map<dynamic, dynamic>;
-      map.forEach(
-          (k, v) {
-            print("$k, $v");
-          }
-      );
-
-      return data;
-    }
-    else{
-      return _nodeRef.child("questions").get();
-    }
-
+  static Future getQuestions() async {
+      return _nodeRef.child("questions").onValue;
   }
 
   Future deleteQuestion(String id) async {

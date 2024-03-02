@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
+import 'package:provider/provider.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
@@ -63,158 +64,162 @@ class _SetPasswordState extends State<SetPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          backgroundColor: AppColors.theme['secondaryBgColor'],
-          body: SafeArea(
-            child: Form(
-              key: _formKey,
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 60,),
-                      Center(
-                        child: Container(
-                          child: Image.asset("assets/images/set_password.png"),
-                          height: 250,
-                          width: 250,
+    return Consumer(builder: (context, value, child){
+      return GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            backgroundColor: AppColors.theme['secondaryBgColor'],
+            body: SafeArea(
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 60,),
+                        Center(
+                          child: Container(
+                            child: Image.asset("assets/images/set_password.png"),
+                            height: 250,
+                            width: 250,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Set your password",
-                              style: TextStyle(
-                                color: AppColors.theme['fontColor'],
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Password",
-                              style: TextStyle(
-                                  fontSize: 16,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Set your password",
+                                style: TextStyle(
+                                  color: AppColors.theme['fontColor'],
+                                  fontSize: 22,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.theme['fontColor']),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            CustomTextField(
-                              hintText: 'Enter your password',
-                              isNumber: false,
-                              prefixicon: Icon(Icons.lock),
-                              controller: _passController,
-                              obsecuretext: _isPasswordHidden,
-                              suffix: IconButton(
-                                icon: Icon(
-                                  _isPasswordHidden
-                                      ? (Icons.visibility_off)
-                                      : (Icons.visibility),
                                 ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isPasswordHidden = !_isPasswordHidden;
-                                  });
-                                },
                               ),
-                              validator: _validatePassword,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              "Confirm Password",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.theme['fontColor']),
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            CustomTextField(
-                              hintText: 'Re-enter your password',
-                              isNumber: false,
-                              prefixicon: Icon(Icons.lock),
-                              controller: _confirmPassController,
-                              obsecuretext: _isConfirmPasswordHidden,
-                              suffix: IconButton(
-                                icon: Icon(
-                                  _isConfirmPasswordHidden
-                                      ? (Icons.visibility_off)
-                                      : (Icons.visibility),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Password",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.theme['fontColor']),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              CustomTextField(
+                                hintText: 'Enter your password',
+                                isNumber: false,
+                                prefixicon: Icon(Icons.lock),
+                                controller: _passController,
+                                obsecuretext: _isPasswordHidden,
+                                suffix: IconButton(
+                                  icon: Icon(
+                                    _isPasswordHidden
+                                        ? (Icons.visibility_off)
+                                        : (Icons.visibility),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _isPasswordHidden = !_isPasswordHidden;
+                                    });
+                                  },
                                 ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isConfirmPasswordHidden =
-                                    !_isConfirmPasswordHidden;
-                                  });
-                                },
+                                validator: _validatePassword,
                               ),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please confirm your password';
-                                } else if (value != _passController.text) {
-                                  return 'Passwords do not match';
-                                }
-                                return null;
-                              },
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            AuthButton(
-                              onpressed: isButtonEnabled
-                                  ? () async {
-                                FocusScope.of(context).unfocus();
-                                if (_formKey.currentState!.validate()) {
-
-                                  //todo:enter set password line
-                                  final res = await AppFirebaseAuth.signUp(widget.email, _passController.text);
-                                  print("#res registration: $res");
-                                  if(res == "Registered") {
-                                    Navigator.pushReplacement(context, LeftToRight(BasicInfo()));
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Confirm Password",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.theme['fontColor']),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              CustomTextField(
+                                hintText: 'Re-enter your password',
+                                isNumber: false,
+                                prefixicon: Icon(Icons.lock),
+                                controller: _confirmPassController,
+                                obsecuretext: _isConfirmPasswordHidden,
+                                suffix: IconButton(
+                                  icon: Icon(
+                                    _isConfirmPasswordHidden
+                                        ? (Icons.visibility_off)
+                                        : (Icons.visibility),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _isConfirmPasswordHidden =
+                                      !_isConfirmPasswordHidden;
+                                    });
+                                  },
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please confirm your password';
+                                  } else if (value != _passController.text) {
+                                    return 'Passwords do not match';
                                   }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              AuthButton(
+                                onpressed: isButtonEnabled
+                                    ? () async {
+                                  FocusScope.of(context).unfocus();
+                                  if (_formKey.currentState!.validate()) {
 
+                                    //todo:enter set password line
+                                    final res = await AppFirebaseAuth.signUp(widget.email, _passController.text);
+
+                                    print("#res registration: $res");
+                                    if(res == "Registered") {
+                                      Navigator.pushReplacement(context, LeftToRight(BasicInfo()));
+                                    }
+
+                                  }
                                 }
-                              }
-                                  : () {
-                                FocusScope.of(context).unfocus();
-                              },
-                              name: 'Set Password',
-                              bcolor: isButtonEnabled
-                                  ? AppColors.theme['fontColor']
-                                  : AppColors.theme['secondaryColor']
-                                  .withOpacity(0.4),
-                              tcolor: isButtonEnabled
-                                  ? AppColors.theme['backgroundColor']
-                                  : AppColors.theme['fontColor']
-                                  .withOpacity(0.5),
-                            ),
-                          ],
+                                    : () {
+                                  FocusScope.of(context).unfocus();
+                                },
+                                name: 'Set Password',
+                                bcolor: isButtonEnabled
+                                    ? AppColors.theme['fontColor']
+                                    : AppColors.theme['secondaryColor']
+                                    .withOpacity(0.4),
+                                tcolor: isButtonEnabled
+                                    ? AppColors.theme['backgroundColor']
+                                    : AppColors.theme['fontColor']
+                                    .withOpacity(0.5),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
+  });
+
   }
 }

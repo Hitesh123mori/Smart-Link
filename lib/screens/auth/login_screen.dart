@@ -4,6 +4,7 @@ import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/screens/student/home_screen_student.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
+import 'package:ingenious_5/utils/helper_functions/HelperFunction.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
@@ -27,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isButtonEnabled = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -191,19 +193,26 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                                child: AuthButton(
+                                child:
+                                _isLoading? CircularProgressIndicator(
+                                  color: AppColors.theme["fontColor"],
+                                )
+                                : AuthButton(
                                   onpressed: isButtonEnabled
                                       ? () async {
                                     FocusScope.of(context).unfocus();
-
+                                    setState(() {
+                                      _isLoading = true;
+                                    });
                                     //todo:enter your logic here
                                     //_passController,_emailController
                                     if (_formKey.currentState!.validate()) {
                                       final res = await AppFirebaseAuth.signIn(_emailController.text,_passController.text);
                                       print("res-login: $res");
                                       // if(res == 'Logged In') push to home screen;
+                                      HelperFunction.showToast(res);
 
-                                       await value.initUser();
+                                      await value.initUser();
 
                                       if(res=="Logged In"){
                                         if(value.user?.type=="S"){
@@ -214,9 +223,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                           print("#navigate-teacher");
                                           Navigator.pushReplacement(context, LeftToRight(HomeTabsTeachers()));
                                         }
-
                                       }
+
                                     }
+
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
 
                                   }
                                       : () {
