@@ -45,16 +45,16 @@ class _HomeTabsStudentsState extends State<HomeTabsStudents> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
+              icon: Icon(Icons.favorite_border_outlined),
+              label: 'Teachers',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.contacts),
-              label: 'Contacts',
+              icon: Icon(Icons.notifications_active_outlined),
+              label: 'Notification',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Setting',
+              icon: Icon(Icons.person),
+              label: 'Profile',
             ),
           ],
         ),
