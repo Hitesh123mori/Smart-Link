@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
-import '../main.dart';
-import '../utils/widgets/buttons/auth_button.dart';
-import '../utils/widgets/text_field/custom_text_field.dart';
+import '../../main.dart';
+import '../../utils/widgets/buttons/auth_button.dart';
+import '../../utils/widgets/text_field/custom_text_field.dart';
+
 import 'otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {

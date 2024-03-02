@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
-import '../utils/widgets/text_field/custom_text_field.dart';
+import '../../utils/widgets/text_field/custom_text_field.dart';
 import 'basic_information.dart';
 
 class SetPassword extends StatefulWidget {
