@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FireStoreAPIs/UserProfileAPI.dart';
 
 import '../../main.dart';
 import '../../utils/colors.dart';
@@ -335,15 +336,24 @@ class _BasicInfoState extends State<BasicInfo> {
                             //todo:work here
                             AuthButton(
                               onpressed: isButtonEnabled
-                                  ? () {
+                                  ? () async {
                                       FocusScope.of(context).unfocus();
                                       if (_formKey.currentState!.validate()) {
 
-                                        //todo:handle register button
-                                        //todo: for accesing name user _nameController
-                                        //todo for accesing  interst list use "interests" lsit;
 
                                         print(interests);
+                                        var type;
+                                        if(isStudent) type = "S";
+                                        else if (isInstitute) type = "I";
+                                        else type = "T";
+
+                                        final res = await UserProfile.signupUser(name: _nameController.text,
+                                            interest: interests, type: type, pincode: _pincodeController.text, address: _addContoller.text);
+
+                                        print("#res-base_info: $res");
+
+                                        // todo if (res == 'ok') push to home screen
+
                                       }
                                     }
                                   : () {

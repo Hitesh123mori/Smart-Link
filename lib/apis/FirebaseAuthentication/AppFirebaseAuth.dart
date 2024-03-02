@@ -1,12 +1,12 @@
 import 'package:ingenious_5/apis/FirebaseAPIs.dart';
-import 'package:ingenious_5/apis/FirebaseAuth/pwd.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ingenious_5/apis/FirebaseAuthentication/pwd.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
 import 'package:otp/otp.dart';
 
 
-class FirebaseAuth {
+class AppFirebaseAuth {
   static var _otp;
 
   static Future<String> sendOTP(String emailAddress) async{
@@ -66,6 +66,7 @@ class FirebaseAuth {
 
   static Future<String> signUp(String emailAddress, String password) async {
     try {
+      print("#Fauth: $emailAddress, $password");
       final credential = FirebaseAPIs.auth.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
@@ -89,7 +90,7 @@ class FirebaseAuth {
         return 'Something want wrong. Please try again later.';
       }
     } catch (e) {
-        print("#error-signUp: ${ e.toString()}");
+        print("#error2-signUp: ${ e.toString()}");
       return 'Something want wrong. Please try again later.';
     }
   }
