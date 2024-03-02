@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "368515858457",
+    "project_id": "ingenious-5",
+    "storage_bucket": "ingenious-5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368515858457:android:f33688440d558736deea88",
+        "android_client_info": {
+          "package_name": "com.example.ingenious_5"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgVr9rBisHgIFgO5VSaVlBf5JhSR4rZNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
