@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/screens/Institute/home_tab_institute.dart';
 import 'package:ingenious_5/screens/student/home_screen_student.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
@@ -218,6 +219,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         if(value.user?.type=="S"){
                                           print("#navigate-student");
                                           Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                        }
+                                        if(value.user?.type=="I"){
+                                          print("#navigate-student");
+                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsInstitute()));
                                         }
                                         if(value.user?.type=="T"){
                                           print("#navigate-teacher");

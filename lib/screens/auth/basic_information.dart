@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ingenious_5/apis/FireStoreAPIs/UserProfileAPI.dart';
 import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/screens/Institute/home_tab_institute.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/helper_functions/HelperFunction.dart';
 import 'package:provider/provider.dart';
@@ -352,6 +353,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                                   if (val == "ok") {
                                                     value.initUser();
                                                     if (isStudent) Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                                    if (isInstitute) Navigator.pushReplacement(context, LeftToRight(HomeTabsInstitute()));
                                                   }
                                                   HelperFunction.showToast(val=='ok'? 'Registered': val);
                                                   return null;
