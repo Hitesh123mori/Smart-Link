@@ -6,6 +6,7 @@ import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
+import '../../utils/helper_functions/HelperFunction.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
 
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   bool _isPasswordHidden = false;
-
+  bool _isLoading  = false;
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
@@ -198,18 +199,37 @@ class _LoginScreenState extends State<LoginScreen> {
                                     //todo:enter your logic here
                                     //_passController,_emailController
                                     if (_formKey.currentState!.validate()) {
-                                      final res = await AppFirebaseAuth.signIn(_emailController.text,_passController.text);
-                                      print("res-login: $res");
-                                      // if(res == 'Logged In') push to home screen;
+                                      setState(() {
+                                        _isLoading = true;
+                                      });
 
-                                       await value.initUser();
+                                      final res = AppFirebaseAuth.signIn(_emailController.text,_passController.text);
 
-                                      if(res=="Logged In"){
-                                        if(value.user?.type=="S"){
-                                          print("#navigate");
-                                          Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                      res.then((val) async {
+                                        print("res-login: $val");
+                                        await value.initUser();
+                                        HelperFunction.showToast(val);
+                                        if(val=="Logged In"){
+                                          if(value.user?.type=="S"){
+                                            print("#navigate");
+                                            Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
+                                          }
+
+                                        }else {
+                                          setState(() {
+                                            _isLoading = false;
+                                          });
                                         }
-                                      }
+                                        return null;
+                                      }).onError((error, stackTrace) {
+                                        print("#res-error: $error, $stackTrace");
+
+                                        setState(() {
+                                          _isLoading = false;
+                                        });
+                                      });
+
+
                                     }
 
                                   }

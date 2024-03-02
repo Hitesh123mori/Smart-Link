@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:ingenious_5/screens/student/profile_students.dart';
-
+import 'package:ingenious_5/screens/teacher/profile_teacher.dart';
 import '../../utils/colors.dart';
-import 'fav_teachers_students.dart';
-import 'home_screen_student.dart';
-import 'notifications_student.dart';
+import 'home_screen_teachers.dart';
+import 'job_request.dart';
+import 'notification_teacher.dart';
 
 
-class HomeTabsStudents extends StatefulWidget {
-  const HomeTabsStudents({super.key});
+
+class HomeTabsTeachers extends StatefulWidget {
+  const HomeTabsTeachers({super.key});
 
   @override
-  State<HomeTabsStudents> createState() => _HomeTabsStudentsState();
+  State<HomeTabsTeachers> createState() => _HomeTabsTeachersState();
 }
 
-class _HomeTabsStudentsState extends State<HomeTabsStudents> {
+class _HomeTabsTeachersState extends State<HomeTabsTeachers> {
 
 
   int _currentIndex = 0;
 
   final List<Widget> children = [
-    HomeScreenStudent(),
-    FavTeachers(),
-    NotificationStudent(),
-    ProfileStudent(),
+
+    HomeScreenTeacher(),
+    JobRequests(),
+    NotificationsTeacher(),
+    ProfileTeacher(),
+
   ];
 
 
@@ -45,12 +47,12 @@ class _HomeTabsStudentsState extends State<HomeTabsStudents> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border_outlined),
-              label: 'Teachers',
+              icon: Icon(Icons.request_page_outlined),
+              label: 'Jobs',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications_active_outlined),
-              label: 'Notification',
+              label: 'Notifications',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
@@ -64,13 +66,13 @@ class _HomeTabsStudentsState extends State<HomeTabsStudents> {
   Widget _buildBody() {
     switch (_currentIndex) {
       case 0:
-        return HomeScreenStudent();
+        return HomeScreenTeacher();
       case 1:
-        return FavTeachers();
+        return JobRequests();
       case 2:
-        return NotificationStudent();
+        return NotificationsTeacher();
       default:
-        return ProfileStudent();
+        return ProfileTeacher();
     }
   }
 
@@ -79,9 +81,5 @@ class _HomeTabsStudentsState extends State<HomeTabsStudents> {
       _currentIndex = index;
     });
   }
-
-
-
-
 
 }

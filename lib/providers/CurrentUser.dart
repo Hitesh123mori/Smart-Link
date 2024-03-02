@@ -22,7 +22,7 @@ class AppUserProvider extends ChangeNotifier{
 
   Future logOut() async {
     await FirebaseAPIs.auth.signOut();
-    user = null;
+    // user = null;
     notifyListeners();
   }
 

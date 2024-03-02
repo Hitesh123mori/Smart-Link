@@ -26,6 +26,14 @@ class _SplashScreenState extends State<SplashScreen> {
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: Colors.black,
         systemNavigationBarIconBrightness: Brightness.dark,
+
+      //     if(Api.auth != null){
+      //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomeScreen())) ;
+      // }else{
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen())) ;
+      // }
+
+
       ));
 
       // Navigator.pushReplacement(context, RightToLeft(OnboardingScreen()));
