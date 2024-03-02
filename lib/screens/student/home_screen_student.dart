@@ -283,18 +283,18 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                   ),
                   Row(
                     children: [
-                      Icon(
-                        Icons.search,
-                        size: 32,
-                        color: AppColors.theme['fontColor'],
+                      IconButton(
+                        icon :Icon(Icons.search,
+                          size: 32,
+                          color: AppColors.theme['fontColor'],), onPressed: () {  },
                       ),
                       SizedBox(
                         width: 10,
                       ),
-                      Icon(
-                        Icons.add,
+                      IconButton(
+                        icon :Icon(Icons.add,
                         size: 32,
-                        color: AppColors.theme['fontColor'],
+                        color: AppColors.theme['fontColor'],), onPressed: () {  },
                       )
                     ],
                   ),
