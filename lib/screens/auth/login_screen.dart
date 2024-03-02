@@ -6,6 +6,7 @@ import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
 import 'package:provider/provider.dart';
 import '../../main.dart';
+import '../../utils/helper_functions/HelperFunction.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
 import '../../utils/widgets/text_field/custom_text_field.dart';
 
@@ -70,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   bool _isPasswordHidden = false;
-
+  bool _isLoading  = false;
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
