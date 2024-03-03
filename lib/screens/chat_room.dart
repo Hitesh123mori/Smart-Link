@@ -92,7 +92,7 @@ class _ChatRoomState extends State<ChatRoom> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 18.0),
                             child: Text(
-                              widget.question.answer!.length.toString() +
+                              widget.question.chat!.length.toString() +
                                   " Answers",
                               style: TextStyle(
                                 color: AppColors.theme['fontColor'],

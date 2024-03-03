@@ -57,7 +57,7 @@ class _QuestionCardState extends State<QuestionCard> {
                children: [
                  Padding(
                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                   child: Text(widget.question.answer!.length.toString() + " Answers",style: TextStyle(
+                   child: Text(widget.question.chat!.length.toString() + " Answers",style: TextStyle(
                      color: AppColors.theme['fontColor'],
                      fontWeight: FontWeight.bold,
                    ),),

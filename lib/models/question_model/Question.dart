@@ -21,7 +21,7 @@ class Question {
       this.userName, 
       this.userType, 
       this.createTime,
-      this.answer,}){
+      this.chat,}){
     qID = FirebaseAPIs.uuid.v1();
   }
 
@@ -36,9 +36,9 @@ class Question {
     userType = json['userType'];
     createTime = json['createTime'];
     if (json['answer'] != null) {
-      answer = [];
+      chat = [];
       json['answer'].forEach((k, v) {
-        answer?.add(Answer.fromJson(v));
+        chat?.add(Chats.fromJson(v));
       });
     }
   }
@@ -51,7 +51,7 @@ class Question {
   String? userName;
   String? userType;
   String? createTime;
-  List<Answer>? answer;
+  List<Chats>? chat;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -64,12 +64,12 @@ class Question {
     map['userName'] = userName;
     map['userType'] = userType;
     map['createTime'] = createTime;
-    if (answer != null) {
+    if (chat != null) {
       Map<dynamic, dynamic> ansMap = {};
-      answer?.map((v) {
+      chat?.map((v) {
         ansMap[v.aId] = v;
       });
-      map['answer'] = ansMap.isNotEmpty? ansMap: null;
+      map['chat'] = ansMap.isNotEmpty? ansMap: null;
     }
     return map;
   }
@@ -84,22 +84,22 @@ class Question {
 /// userType : ""
 /// createTime : ""
 
-class Answer {
-  Answer({
+class Chats {
+  Chats({
       this.text, 
       this.vote, 
-      this.userId, 
+      this.fromId,
       this.userName, 
       this.userType, 
       this.createTime,}){
     aId = FirebaseAPIs.uuid.v1();
   }
 
-  Answer.fromJson(dynamic json) {
+  Chats.fromJson(dynamic json) {
     aId = json['aId'];
     text = json['text'];
     vote = json['vote'];
-    userId = json['userId'];
+    fromId = json['fromId'];
     userName = json['userName'];
     userType = json['userType'];
     createTime = json['createTime'];
@@ -107,7 +107,7 @@ class Answer {
   String? aId;
   String? text;
   num? vote;
-  String? userId;
+  String? fromId;
   String? userName;
   String? userType;
   String? createTime;
@@ -117,7 +117,7 @@ class Answer {
     map['aId'] = aId;
     map['text'] = text;
     map['vote'] = vote;
-    map['userId'] = userId;
+    map['userId'] = fromId;
     map['userName'] = userName;
     map['userType'] = userType;
     map['createTime'] = createTime;
