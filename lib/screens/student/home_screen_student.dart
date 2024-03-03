@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/apis/FirebaseAPIs.dart';
-import 'package:ingenious_5/apis/FirebaseDatabaseAPIs/QuestionAPIs.dart';
 import 'package:ingenious_5/models/question_model/Question.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/colors.dart';
 
 import '../../main.dart';
+import '../../models/message_model.dart';
 import '../../utils/widgets/student/question_card.dart';
 import 'add_question.dart';
 
@@ -27,34 +27,61 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         userType: "S",
         createTime: "2:03,3 March",
         chat: [
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+
         ],
         domain: [
           "Computer Sciece",
@@ -68,198 +95,87 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         userType: "S",
         createTime: "2:03,3 March",
         chat: [
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+
         ],
         domain: [
           "Computer Sciece",
           "Assemby Language",
           "Operating System"
-        ]),
-    Question(
+        ]),Question(
         text: "What is Operating System ? What is Operating System ? ",
         userId: "1332324",
         userName: "Hitesh Mori",
         userType: "S",
         createTime: "2:03,3 March",
         chat: [
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+
         ],
         domain: [
           "Computer Sciece",
           "Assemby Language",
           "Operating System"
-        ]),
-    Question(
+        ]),Question(
         text: "What is Operating System ? What is Operating System ? ",
         userId: "1332324",
         userName: "Hitesh Mori",
         userType: "S",
         createTime: "2:03,3 March",
         chat: [
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+          DoubtMessage(
+              msg: "Operating system is moderator between use and hideware",
               vote: 23,
               fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-        ],
-        domain: [
-          "Computer Sciece",
-          "Assemby Language",
-          "Operating System"
-        ]),
-    Question(
-        text: "What is Operating System ? What is Operating System ? ",
-        userId: "1332324",
-        userName: "Hitesh Mori",
-        userType: "S",
-        createTime: "2:03,3 March",
-        chat: [
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-        ],
-        domain: [
-          "Computer Sciece",
-          "Assemby Language",
-          "Operating System"
-        ]),
-    Question(
-        text: "What is Operating System ? What is Operating System ? ",
-        userId: "1332324",
-        userName: "Hitesh Mori",
-        userType: "S",
-        createTime: "2:03,3 March",
-        chat: [
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Chats(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              fromId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
+              fromName: "Harsh Rajput",
+              time: "2:07", type: Type.text),
+
         ],
         domain: [
           "Computer Sciece",
@@ -267,6 +183,31 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
           "Operating System"
         ]),
   ];
+
+  List<String> _filters = [];
+  List<String> _items = [];
+
+  bool _isSelected(String filter) {
+    return _filters.contains(filter);
+  }
+
+  void _toggleFilter(String filter) {
+    setState(() {
+      if (_filters.contains(filter)) {
+        _filters.remove(filter);
+      } else {
+        _filters.add(filter);
+      }
+    });
+  }
+
+  List<String> _getFilteredItems() {
+    if (_filters.isEmpty) {
+      return _items;
+    } else {
+      return _items.where((item) => _filters.contains(item)).toList();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -316,6 +257,17 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Wrap(
+              children: _items
+                  .map((filter) => FilterChip(
+                        label: Text(filter),
+                        selected: _isSelected(filter),
+                        onSelected: (_) {
+                          _toggleFilter(filter);
+                        },
+                      ))
+                  .toList(),
+            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
@@ -343,7 +295,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                     return Row(
                       children: List<Widget>.generate(
                         qList.length,
-                            (index) => QuestionCard(question: qList[index], width: 300),
+                        (index) => QuestionCard(question: qList[index], width: 300),
                       ).toList(),
                     );
                   },
@@ -364,19 +316,51 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Column(
-                    children: dummyquestions.map((question) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                        child: QuestionCard(
-                          question: question,
-                          width: mq.width * 1,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: StreamBuilder(
+                      stream: FirebaseAPIs.rtdbRef.child("questions").onValue,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        }
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+                        if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
+                          return Text('No data available');
+                        }
+                        print("#snap ${snapshot.data!.snapshot.value}");
+                        Map<dynamic, dynamic> messages = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
+                        // Extracting message values from the Map
+                        List<Question> qList = [];
+                        messages.forEach((key, value) {
+                          Question q = Question.fromJson(value);
+                          // for(int i=0; i<)
+                          qList.add(q);
+                        });
+
+                        return Column(
+                          children: List<Widget>.generate(
+                            qList.length,
+                                (index) => QuestionCard(question: qList[index], width: 300),
+                          ).toList(),
+                        );
+
+                      },
+                    )
+
+                    // Column(
+                    //   children: dummyquestions.map((question) {
+                    //     return Padding(
+                    //       padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                    //       child: QuestionCard(
+                    //         question: question,
+                    //         width: mq.width * 1,
+                    //       ),
+                    //     );
+                    //   }).toList(),
+                    // ),
+                    ),
               ),
             ),
           ],

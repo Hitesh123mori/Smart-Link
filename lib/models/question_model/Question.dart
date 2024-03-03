@@ -1,4 +1,5 @@
 import 'package:ingenious_5/apis/FirebaseAPIs.dart';
+import 'package:ingenious_5/models/message_model.dart';
 
 /// qID : ""
 /// text : ""
@@ -38,7 +39,8 @@ class Question {
     if (json['answer'] != null) {
       chat = [];
       json['answer'].forEach((k, v) {
-        chat?.add(Chats.fromJson(v));
+        print("#v: $v");
+        chat?.add(DoubtMessage.fromJson(v));
       });
     }
   }
@@ -51,7 +53,7 @@ class Question {
   String? userName;
   String? userType;
   String? createTime;
-  List<Chats>? chat;
+  List<DoubtMessage>? chat;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -67,60 +69,10 @@ class Question {
     if (chat != null) {
       Map<dynamic, dynamic> ansMap = {};
       chat?.map((v) {
-        ansMap[v.aId] = v;
+        ansMap[v.cId] = v;
       });
       map['chat'] = ansMap.isNotEmpty? ansMap: null;
     }
-    return map;
-  }
-
-}
-
-/// aId : ""
-/// text : ""
-/// vote : 23123
-/// userId : ""
-/// userName : ""
-/// userType : ""
-/// createTime : ""
-
-class Chats {
-  Chats({
-      this.text, 
-      this.vote, 
-      this.fromId,
-      this.userName, 
-      this.userType, 
-      this.createTime,}){
-    aId = FirebaseAPIs.uuid.v1();
-  }
-
-  Chats.fromJson(dynamic json) {
-    aId = json['aId'];
-    text = json['text'];
-    vote = json['vote'];
-    fromId = json['fromId'];
-    userName = json['userName'];
-    userType = json['userType'];
-    createTime = json['createTime'];
-  }
-  String? aId;
-  String? text;
-  num? vote;
-  String? fromId;
-  String? userName;
-  String? userType;
-  String? createTime;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['aId'] = aId;
-    map['text'] = text;
-    map['vote'] = vote;
-    map['userId'] = fromId;
-    map['userName'] = userName;
-    map['userType'] = userType;
-    map['createTime'] = createTime;
     return map;
   }
 
