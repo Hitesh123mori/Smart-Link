@@ -25,7 +25,7 @@ class AppFirebaseAuth {
 
       // Create our message.
       final message = Message()
-        ..from = Address(username, '<AppName>')
+        ..from = Address(username, 'SmartLink')
         ..recipients.add(emailAddress.toString())
         ..subject = 'OTP verification for SmartLink ${DateTime.now()}'
         ..text = 'Your OTP for verification is $otp1';
