@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../apis/FirebaseAPIs.dart';
+import '../../main.dart';
+import '../../models/question_model/Question.dart';
+import '../../providers/CurrentUser.dart';
+import '../../transitions/left_right.dart';
 import '../../utils/colors.dart';
-import '../../utils/widgets/student/question_card.dart';
+import '../../utils/widgets/teacher/question_card.dart';
 import '../student/add_question.dart';
 
 class HomeScreenTeacher extends StatefulWidget {
@@ -60,31 +66,7 @@ class _HomeScreenTeacherState extends State<HomeScreenTeacher> {
                   "Top Questions",
                   style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.theme['fontColor']),
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.search,
-                        size: 32,
-                        color: AppColors.theme['fontColor'],
-                      ),
-                      onPressed: () {},
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.add,
-                        size: 32,
-                        color: AppColors.theme['fontColor'],
-                      ),
-                      onPressed: () {
-                        Navigator.push(context, LeftToRight(AddQuesion()));
-                      },
-                    )
-                  ],
-                ),
+
               ],
             ),
           ),
