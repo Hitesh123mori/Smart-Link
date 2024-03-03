@@ -14,6 +14,7 @@ import 'package:ingenious_5/models/message_model.dart';
 
 class Question {
   Question({
+    this.qID,
       this.text, 
       this.vote, 
       this.domain, 
@@ -22,9 +23,7 @@ class Question {
       this.userName, 
       this.userType, 
       this.createTime,
-      this.chat,}){
-    qID = FirebaseAPIs.uuid.v1();
-  }
+      this.chat,});
 
   Question.fromJson(dynamic json) {
     qID = json['qID'];
@@ -36,11 +35,12 @@ class Question {
     userName = json['userName'];
     userType = json['userType'];
     createTime = json['createTime'];
-    if (json['answer'] != null) {
+    if (json['chats'] != null) {
       chat = [];
-      json['answer'].forEach((k, v) {
-        print("#v: $v");
-        chat?.add(DoubtMessage.fromJson(v));
+      json['chats'].forEach((k, v) {
+        var t = v as Map<dynamic, dynamic>;
+        print("#v: ${t}");
+        chat?.add(DoubtMessage.fromJson(t));
       });
     }
   }
