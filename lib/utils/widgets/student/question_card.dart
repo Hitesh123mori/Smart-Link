@@ -4,7 +4,6 @@ import 'package:ingenious_5/screens/chat_room.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/helper_functions/HelperFunction.dart';
 import 'package:ingenious_5/utils/helper_functions/date_formate.dart';
-
 import '../../../main.dart';
 import '../../colors.dart';
 
@@ -75,7 +74,7 @@ class _QuestionCardState extends State<QuestionCard> {
                    ),
                    Padding(
                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                     child: Text(MyDateUtil.getLastMessageTime(context: context, time: widget.question!.createTime ?? "0"),style: TextStyle(
+                     child: Text(MyDateUtil.getLastMessageTime(context: context, time: widget.question.createTime ?? "0"),style: TextStyle(
                        color: AppColors.theme['fontColor'],
                        fontWeight: FontWeight.bold,
                      ),),

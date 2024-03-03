@@ -7,6 +7,7 @@ import 'package:ingenious_5/models/question_model/Question.dart';
 import 'package:ingenious_5/models/user_model/AppUser.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/utils/widgets/message_card.dart';
+import 'package:ingenious_5/utils/widgets/student/question_card.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
@@ -38,124 +39,57 @@ class _ChatRoomState extends State<ChatRoom> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           extendBody: true,
-          body: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 60),
-                child: Container(
-                  width: mq.width * 1,
-                  height: 170,
-                  decoration: BoxDecoration(
-                    color: AppColors.theme['secondaryColor'].withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ListTile(
-                          leading: CircleAvatar(
-                            child: Text(
-                              widget.question.userName![0],
-                              style: TextStyle(color: AppColors.theme['fontColor']),
-                            ),
-                            backgroundColor: AppColors.theme['secondaryColor'].withOpacity(0.5),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Column(
+                children: [
+                  QuestionCard(question: widget.question, width: mq.width*1),
+                  Expanded(
+                    child: StreamBuilder(
+                      stream: FirebaseAPIs.rtdbRef.child("questions/${widget.question.qID}/chats").onValue,
+                      builder: (context, snapshot) {
+                        // if (snapshot.connectionState == ConnectionState.waiting) {
+                        //   return Center(child: Container());
+                        // }
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+                        if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
+                          return Text('No data available');
+                        }
+                        print("#snap ${snapshot.data!.snapshot.value}");
+                        Map<dynamic, dynamic> messages = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
+                        // Extracting message values from the Map
+                        List<DoubtMessage> dmList = [];
+                        messages.forEach((key, value) {
+                          DoubtMessage dm = DoubtMessage.fromJson(value);
+                          // for(int i=0; i<)
+                          dmList.add(dm);
+                        });
+                        dmList.sort((a, b) => a.time.compareTo(b.time));
+            
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: List<Widget>.generate(
+                              dmList.length,
+                              (index) {
+                                print("#obj: ${dmList[index].cId} ${dmList[index].fromName}");
+                                return MessageCard(
+                                  msg: dmList[index],
+                                  user: value.user!,
+                                );
+                              },
+                            ).toList(),
                           ),
-                          title: Text(
-                            widget.question.userName!,
-                            style: TextStyle(
-                              color: AppColors.theme['fontColor'],
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                          child: Text(
-                            widget.question.text!,
-                            style: TextStyle(
-                              color: AppColors.theme['fontColor'],
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                              child: Text(
-                                (widget.question.chat?.length.toString() ?? "0") + " Answers",
-                                style: TextStyle(
-                                  color: AppColors.theme['fontColor'],
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                              child: Text(
-                                widget.question.createTime!,
-                                style: TextStyle(
-                                  color: AppColors.theme['fontColor'],
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+                        );
+                      },
                     ),
                   ),
-                ),
+                  buildChatInput(value.user!),
+                ],
               ),
-              Expanded(
-                child: StreamBuilder(
-                  stream: FirebaseAPIs.rtdbRef.child("questions/${widget.question.qID}/chats").onValue,
-                  builder: (context, snapshot) {
-                    // if (snapshot.connectionState == ConnectionState.waiting) {
-                    //   return Center(child: Container());
-                    // }
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
-                      return Text('No data available');
-                    }
-                    print("#snap ${snapshot.data!.snapshot.value}");
-                    Map<dynamic, dynamic> messages = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
-                    // Extracting message values from the Map
-                    List<DoubtMessage> dmList = [];
-                    messages.forEach((key, value) {
-                      DoubtMessage dm = DoubtMessage.fromJson(value);
-                      // for(int i=0; i<)
-                      dmList.add(dm);
-                    });
-
-                    return SingleChildScrollView(
-                      child: Column(
-                        children: List<Widget>.generate(
-                          dmList.length,
-                          (index) {
-                            print("#obj: ${dmList[index].cId} ${dmList[index].fromName}");
-                            return MessageCard(
-                              msg: dmList[index],
-                              user: value.user!,
-                            );
-                          },
-                        ).toList(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              buildChatInput(value.user!),
-            ],
+            ),
           ),
         ),
       );
