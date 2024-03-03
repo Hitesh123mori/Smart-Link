@@ -41,7 +41,9 @@ class _MessageCardState extends State<MessageCard> {
     return Row(
       children: [
         Flexible(
-          child: Container(),
+          child: Container(
+            child: Text(widget.msg.msg),
+          ),
         ),
       ],
     );
@@ -51,7 +53,7 @@ class _MessageCardState extends State<MessageCard> {
     return Row(
       children: [
         Flexible(
-          child: Container(),
+          child: Container(child: Text(widget.msg.msg),),
         ),
       ],
     );

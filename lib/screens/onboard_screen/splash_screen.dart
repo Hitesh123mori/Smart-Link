@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/CampusQ.png",
+                    "assets/images/SL (1).png",
                     height: 200,
                     width: 200,
                   ),
@@ -87,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: mq.width * 0.2),
                     child: Text(
-                      "CampusQ",
+                      "SmartLink",
                       style: TextStyle(
                           color: AppColors.theme['fontColor'],
                           fontSize:25,fontWeight: FontWeight.bold),

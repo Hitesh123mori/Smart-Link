@@ -7,8 +7,8 @@ class QuestionAPIs{
   static final _nodeRef = FirebaseAPIs.rtdbRef;
 
   /// for asking question
-  Future postQuestion(Question question)async{
-    _nodeRef.child("questions/${question.qID}").push().set(question.toJson())
+  static Future postQuestion(Question question)async{
+    _nodeRef.child("questions/${question.qID}").set(question.toJson())
     .then((value) => "Question Posted")
     .onError((error, stackTrace) => "#error: $error \n $stackTrace")
     ;
@@ -16,7 +16,7 @@ class QuestionAPIs{
 
 
   /// for answering and sub questioning
-  Future postAnswer(String qId, DoubtMessage message)async{
+  static Future postChat(String qId, DoubtMessage message)async{
     _nodeRef.child("questions/${qId}/chats").push().set(message.toJson())
     .then((value) => "Posted")
     .onError((error, stackTrace) => "#error: $error \n $stackTrace")

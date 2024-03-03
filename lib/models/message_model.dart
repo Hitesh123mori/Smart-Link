@@ -19,7 +19,7 @@ class DoubtMessage{
   late final String fromName;
   late final String cId;
 
-  DoubtMessage.fromJson(Map<String, dynamic> json){
+  DoubtMessage.fromJson(Map<dynamic, dynamic> json){
     cId = json['cId'].toString();
     msg = json['msg'].toString();
     type = json['type'].toString() == Type.image.name ? Type.image  :Type.text;
