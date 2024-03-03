@@ -225,7 +225,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                     width: mq.width * 0.02,
                                   ),
                                   InkWell(
-                                    onTap: () async {
+                                    onTap: () {
                                       String interest = interestController.text.trim();
                                       if (interest.isNotEmpty) {
                                         setState(() {
@@ -233,9 +233,6 @@ class _BasicInfoState extends State<BasicInfo> {
                                           interestController.clear();
                                         });
                                       }
-
-                                      await InterestAPIs.addInterest(interest);
-
                                     },
                                     child: Container(
                                       child: Center(
@@ -258,7 +255,7 @@ class _BasicInfoState extends State<BasicInfo> {
                                     itemBuilder: (context, index) {
                                       return ListTile(
                                         title: Text(suggestedInterests[index]),
-                                        onTap: () async {
+                                        onTap: () {
                                           setState(() {
                                             interests.add(suggestedInterests[index]);
                                             interestController.clear();
