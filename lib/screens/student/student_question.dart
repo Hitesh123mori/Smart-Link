@@ -22,73 +22,32 @@ class _StudentDoubtState extends State<StudentDoubt> {
         userName: "Hitesh Mori",
         userType: "S",
         createTime: "2:03,3 March",
-        answer: [
-          Answer(
+        chat: [
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-        ],
-        domain: [
-          "Computer Sciece",
-          "Assemby Language",
-          "Operating System"
-        ]),
-    Question(
-        text: "What is Operating System ? What is Operating System ? ",
-        userId: "1332324",
-        userName: "Hitesh Mori",
-        userType: "S",
-        createTime: "2:03,3 March",
-        answer: [
-          Answer(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              userId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Answer(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              userId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Answer(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              userId: "1312131313",
-              userName: "Harsh Rajput",
-              userType: "T",
-              createTime: "2:07"),
-          Answer(
-              text: "Operating system is moderator between use and hideware",
-              vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
@@ -104,32 +63,32 @@ class _StudentDoubtState extends State<StudentDoubt> {
         userName: "Hitesh Mori",
         userType: "S",
         createTime: "2:03,3 March",
-        answer: [
-          Answer(
+        chat: [
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
@@ -145,32 +104,73 @@ class _StudentDoubtState extends State<StudentDoubt> {
         userName: "Hitesh Mori",
         userType: "S",
         createTime: "2:03,3 March",
-        answer: [
-          Answer(
+        chat: [
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),
-          Answer(
+          Chats(
               text: "Operating system is moderator between use and hideware",
               vote: 23,
-              userId: "1312131313",
+              fromId: "1312131313",
+              userName: "Harsh Rajput",
+              userType: "T",
+              createTime: "2:07"),
+        ],
+        domain: [
+          "Computer Sciece",
+          "Assemby Language",
+          "Operating System"
+        ]),
+    Question(
+        text: "What is Operating System ? What is Operating System ? ",
+        userId: "1332324",
+        userName: "Hitesh Mori",
+        userType: "S",
+        createTime: "2:03,3 March",
+        chat: [
+          Chats(
+              text: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              userName: "Harsh Rajput",
+              userType: "T",
+              createTime: "2:07"),
+          Chats(
+              text: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              userName: "Harsh Rajput",
+              userType: "T",
+              createTime: "2:07"),
+          Chats(
+              text: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
+              userName: "Harsh Rajput",
+              userType: "T",
+              createTime: "2:07"),
+          Chats(
+              text: "Operating system is moderator between use and hideware",
+              vote: 23,
+              fromId: "1312131313",
               userName: "Harsh Rajput",
               userType: "T",
               createTime: "2:07"),

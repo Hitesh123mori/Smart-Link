@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FireStoreAPIs/InterestAPIs.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/screens/auth/login_screen.dart';
 import 'package:ingenious_5/transitions/right_left.dart';
@@ -19,12 +20,22 @@ class ProfileInstitute extends StatefulWidget {
 class _ProfileInstituteState extends State<ProfileInstitute> {
   TextEditingController interestController = TextEditingController();
   List<String> interests = [];
-  List<String> dummyInterests = ["Mathematics", "Physics", "Biology", "Computer Science", "History", "Literature"];
+  List<String> dummyInterests = [];
   List<String> suggestedInterests = [];
 
   void suggestInterests(String userInput) {
     suggestedInterests = dummyInterests.where((interest) => interest.toLowerCase().contains(userInput.toLowerCase())).toList();
     setState(() {});
+  }
+
+  Future getInterests() async {
+    dummyInterests = await InterestAPIs.getInterests();
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    getInterests();
   }
 
   @override
@@ -164,13 +175,15 @@ class _ProfileInstituteState extends State<ProfileInstitute> {
                             width: mq.width * 0.02,
                           ),
                           InkWell(
-                            onTap: () {
+                            onTap: () async {
                               String interest = interestController.text.trim();
                               if (interest.isNotEmpty) {
                                 setState(() {
-                                  interests.add(interest);
+                                  value.user?.interest?.add(interest);
                                   interestController.clear();
                                 });
+                                  dummyInterests.add(interest);
+                                  await InterestAPIs.addInterest(interest);
                               }
                             },
                             child: Container(
@@ -196,7 +209,7 @@ class _ProfileInstituteState extends State<ProfileInstitute> {
                                 title: Text(suggestedInterests[index]),
                                 onTap: () {
                                   setState(() {
-                                    interests.add(suggestedInterests[index]);
+                                    value.user?.interest?.add(suggestedInterests[index]);
                                     interestController.clear();
                                     suggestedInterests.clear();
                                   });

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
+import 'package:ingenious_5/utils/helper_functions/HelperFunction.dart';
 import 'package:provider/provider.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets/buttons/auth_button.dart';
@@ -188,6 +189,8 @@ class _SetPasswordState extends State<SetPassword> {
                                     final res = await AppFirebaseAuth.signUp(widget.email, _passController.text);
 
                                     print("#res registration: $res");
+                                    HelperFunction.showToast(res);
+
                                     if(res == "Registered") {
                                       Navigator.pushReplacement(context, LeftToRight(BasicInfo()));
                                     }

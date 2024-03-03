@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FireStoreAPIs/InterestAPIs.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/screens/auth/login_screen.dart';
 import 'package:ingenious_5/transitions/right_left.dart';
@@ -167,15 +168,18 @@ class _ProfileStudentState extends State<ProfileStudent> {
                                 width: mq.width * 0.02,
                               ),
                               InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   String interest = interestController.text.trim();
                                   if (interest.isNotEmpty) {
                                     setState(() {
                                       interests.add(interest);
                                       interestController.clear();
                                     });
+                                    dummyInterests.add(interest);
+                                    await InterestAPIs.addInterest(interest);
                                   }
                                 },
+
                                 child: Container(
                                   child: Center(
                                       child: Text(
@@ -199,7 +203,7 @@ class _ProfileStudentState extends State<ProfileStudent> {
                                     title: Text(suggestedInterests[index]),
                                     onTap: () {
                                       setState(() {
-                                        interests.add(suggestedInterests[index]);
+                                        value.user?.interest?.add(suggestedInterests[index]);
                                         interestController.clear();
                                         suggestedInterests.clear();
                                       });

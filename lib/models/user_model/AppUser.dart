@@ -12,7 +12,9 @@ class AppUser {
     this.institute,
     this.staredList,
     this.notificationPushToken,
-  });
+  }){
+    rating = 0;
+  }
 
   AppUser.fromJson(dynamic json) {
     userId = json['userId'];
@@ -27,6 +29,7 @@ class AppUser {
     vacancy = json['vacancy'] != null ? Vacancy.fromJson(json['vacancy']) : null;
     institute = json['institute'];
     notificationPushToken = json['notificationPushToken'];
+    rating = json["rating"];
   }
   String? userId;
   String? name;
@@ -34,12 +37,16 @@ class AppUser {
   String? address;
   String? pincode;
   String? type;
-  List<String>? interest;
-  List<String>? qualification;
-  List<String>? staredList;
-  Vacancy? vacancy;
-  String? institute;
   String? notificationPushToken;
+  List<String>? interest;
+
+  List<String>? staredList;
+
+  Vacancy? vacancy;
+
+  String? institute;
+  List<String>? qualification;
+  num? rating;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -57,6 +64,7 @@ class AppUser {
     map['institute'] = institute;
     map['staredList'] = staredList;
     map['notificationPushToken'] = notificationPushToken;
+    map['rating'] = rating;
     return map;
   }
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FireStoreAPIs/InterestAPIs.dart';
 import 'package:ingenious_5/apis/FireStoreAPIs/UserProfileAPI.dart';
 import 'package:ingenious_5/apis/FirebaseAuthentication/AppFirebaseAuth.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/screens/Institute/home_tab_institute.dart';
-import 'package:ingenious_5/screens/teacher/home_screen_teachers.dart';
+import 'package:ingenious_5/screens/teacher/home_tabs_teachers.dart';
 import 'package:ingenious_5/transitions/left_right.dart';
 import 'package:ingenious_5/utils/helper_functions/HelperFunction.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class _BasicInfoState extends State<BasicInfo> {
   // student  and teacher common fields
   TextEditingController interestController = TextEditingController();
   List<String> interests = [];
-  List<String> dummyInterests = ["Mathematics", "Physics", "Biology", "Computer Science", "History", "Literature"];
+  List<String> dummyInterests = [];
   List<String> suggestedInterests = [];
 
   void suggestInterests(String userInput) {
@@ -51,12 +52,18 @@ class _BasicInfoState extends State<BasicInfo> {
   bool isButtonEnabled = false;
   bool isLoading = false;
 
+  Future getInterest() async {
+    dummyInterests = await InterestAPIs.getInterests();
+  }
+
+
   @override
   void initState() {
     super.initState();
     _nameController.addListener(updateButtonState);
     _addContoller.addListener(updateButtonState);
     _pincodeController.addListener(updateButtonState);
+    getInterest();
   }
 
   void updateButtonState() {
@@ -354,8 +361,8 @@ class _BasicInfoState extends State<BasicInfo> {
                                                   if (val == "ok") {
                                                     value.initUser();
                                                     if (isStudent) Navigator.pushReplacement(context, LeftToRight(HomeTabsStudents()));
-                                                    if (isTeacher) Navigator.pushReplacement(context, LeftToRight(HomeScreenTeacher()));
                                                     if (isInstitute) Navigator.pushReplacement(context, LeftToRight(HomeTabsInstitute()));
+                                                    if (isTeacher) Navigator.pushReplacement(context, LeftToRight(HomeTabsTeachers()));
                                                   }
                                                   HelperFunction.showToast(val=='ok'? 'Registered': val);
                                                   return null;
