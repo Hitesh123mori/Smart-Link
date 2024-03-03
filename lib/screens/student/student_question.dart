@@ -1,21 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:ingenious_5/models/question_model/Question.dart';
-import 'package:ingenious_5/transitions/left_right.dart';
+import 'package:flutter/material.dart' ;
 import 'package:ingenious_5/utils/colors.dart';
 
 import '../../main.dart';
+import '../../models/question_model/Question.dart';
 import '../../utils/widgets/student/question_card.dart';
-import 'add_question.dart';
 
-class HomeScreenStudent extends StatefulWidget {
-  const HomeScreenStudent({super.key});
+
+class StudentDoubt extends StatefulWidget {
+  const StudentDoubt({super.key});
 
   @override
-  State<HomeScreenStudent> createState() => _HomeScreenStudentState();
+  State<StudentDoubt> createState() => _StudentDoubtState();
 }
 
-class _HomeScreenStudentState extends State<HomeScreenStudent> {
-  final FocusNode _focusNode = FocusNode();
+class _StudentDoubtState extends State<StudentDoubt> {
 
   List<Question> dummyquestions = [
     Question(
@@ -188,74 +186,24 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            backgroundColor: AppColors.theme['backgroundColor'],
-            appBar: AppBar(
-              surfaceTintColor: AppColors.theme['backgroundColor'],
-              backgroundColor: AppColors.theme['backgroundColor'],
-              centerTitle: true,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Top Questions",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.theme['fontColor']),
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.search,
-                          size: 32,
-                          color: AppColors.theme['fontColor'],
-                        ),
-                        onPressed: () {},
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.add,
-                          size: 32,
-                          color: AppColors.theme['fontColor'],
-                        ),
-                        onPressed: () {
-                          Navigator.push(context, LeftToRight(AddQuesion()));
-                        },
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            body: Column(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "My Questions",
+            style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.theme['backgroundColor'], fontSize: 20),
+          ),
+          backgroundColor: AppColors.theme['primaryColor'],
+        ),
+
+        body:Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
-                  children: dummyquestions.map((question) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                      child: QuestionCard(
-                        question: question,
-                        width: 300,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
               child: Text(
-                "Related Questions",
+                "My Questions",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: AppColors.theme['fontColor'],
@@ -265,6 +213,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
             ),
             Expanded(
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
@@ -283,9 +232,7 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
             ),
           ],
         ),
-
-
-
-    ));
+      ),
+    );
   }
 }

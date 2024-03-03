@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ingenious_5/screens/student/profile_students.dart';
-
+import 'package:ingenious_5/screens/student/student_question.dart';
 import '../../utils/colors.dart';
 import 'fav_teachers_students.dart';
 import 'home_screen_student.dart';
@@ -24,6 +24,7 @@ class _HomeTabsStudentsState extends State<HomeTabsStudents> {
     FavTeachers(),
     NotificationStudent(),
     ProfileStudent(),
+    StudentDoubt(),
   ];
 
 
@@ -49,6 +50,10 @@ class _HomeTabsStudentsState extends State<HomeTabsStudents> {
               label: 'Teachers',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.question_answer_outlined),
+              label: 'My Doubts',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.notifications_active_outlined),
               label: 'Notification',
             ),
@@ -68,6 +73,8 @@ class _HomeTabsStudentsState extends State<HomeTabsStudents> {
       case 1:
         return FavTeachers();
       case 2:
+        return StudentDoubt();
+      case 3:
         return NotificationStudent();
       default:
         return ProfileStudent();
