@@ -96,7 +96,7 @@ class _MessageCardState extends State<MessageCard> {
                     padding: const EdgeInsets.only(left: 10.0, right: 10),
                     child: Center(
                       child: Text(
-                        widget.user.name!,
+                        widget.msg.fromName,
                         style: TextStyle(
                             color: AppColors.theme['fontColor'],
                             fontSize: 14,fontWeight: FontWeight.w900),
