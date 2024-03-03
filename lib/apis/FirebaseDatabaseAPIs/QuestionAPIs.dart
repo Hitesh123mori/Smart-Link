@@ -21,4 +21,12 @@ class QuestionAPIs{
     return _nodeRef.child("questions/${id.toString()}").remove();
   }
 
+  static Future getMyQuestions(String userId) async {
+    return _nodeRef.child("questions").orderByChild("userId").equalTo(userId).onValue;
+  }
+
+  static Future getHighRatingQuestions() async {
+    return _nodeRef.child("questions").orderByChild("vote").limitToFirst(2).onValue;
+  }
+
 }

@@ -64,7 +64,7 @@ class _QuestionCardState extends State<QuestionCard> {
                  ),
                  Padding(
                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                   child: Text(widget.question.createTime!,style: TextStyle(
+                   child: Text(widget.question.createTime?? "",style: TextStyle(
                      color: AppColors.theme['fontColor'],
                      fontWeight: FontWeight.bold,
                    ),),
