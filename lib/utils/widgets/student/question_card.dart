@@ -41,6 +41,7 @@ class _QuestionCardState extends State<QuestionCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 20,),
                 ListTile(
                   leading: CircleAvatar(
                     child: Text(

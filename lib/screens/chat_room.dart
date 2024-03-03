@@ -6,6 +6,7 @@ import 'package:ingenious_5/apis/FirebaseDatabaseAPIs/QuestionAPIs.dart';
 import 'package:ingenious_5/models/question_model/Question.dart';
 import 'package:ingenious_5/models/user_model/AppUser.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/utils/helper_functions/date_formate.dart';
 import 'package:ingenious_5/utils/widgets/message_card.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +101,8 @@ class _ChatRoomState extends State<ChatRoom> {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 18.0),
                               child: Text(
-                                widget.question.createTime!,
+                                MyDateUtil.getLastMessageTime(context: context, time: widget.question.createTime ?? "013454")
+                                ,
                                 style: TextStyle(
                                   color: AppColors.theme['fontColor'],
                                   fontWeight: FontWeight.bold,
@@ -127,11 +129,13 @@ class _ChatRoomState extends State<ChatRoom> {
                     if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
                       return Text('No data available');
                     }
-                    print("#snap ${snapshot.data!.snapshot.value}");
                     Map<dynamic, dynamic> messages = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
                     // Extracting message values from the Map
+                    // print("#snap ${messages[widget.question.qID]["chats"]}");
+
                     List<DoubtMessage> dmList = [];
                     messages.forEach((key, value) {
+                      print("#dmL: $dmList");
                       DoubtMessage dm = DoubtMessage.fromJson(value);
                       // for(int i=0; i<)
                       dmList.add(dm);
