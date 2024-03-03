@@ -1,30 +1,24 @@
 import 'package:ingenious_5/apis/FirebaseAPIs.dart';
+import 'package:ingenious_5/models/message_model.dart';
 import 'package:ingenious_5/models/question_model/Question.dart';
+import 'package:mailer/mailer.dart';
 
 class QuestionAPIs{
   static final _nodeRef = FirebaseAPIs.rtdbRef;
 
   /// for asking question
-  Future postQuestion(Question question)async{
-    _nodeRef.child("questions/${question.qID}").push().set(question.toJson())
+  static Future postQuestion(Question question)async{
+    _nodeRef.child("questions/${question.qID}").set(question.toJson())
     .then((value) => "Question Posted")
     .onError((error, stackTrace) => "#error: $error \n $stackTrace")
     ;
   }
 
 
-  /// for asking sub-question
-  Future postSubQuestion(Question question)async{
-    _nodeRef.child("questions/${question.qID}/chats").push().set(question.toJson())
-    .then((value) => "Sub-Question Posted")
-    .onError((error, stackTrace) => "#error: $error \n $stackTrace")
-    ;
-  }
-
-  /// for answering
-  Future postAnswer(String qId, Chats chat)async{
-    _nodeRef.child("questions/${qId}/chats").push().set(chat.toJson())
-    .then((value) => "Answer Posted")
+  /// for answering and sub questioning
+  static Future postChat(String qId, DoubtMessage message)async{
+    _nodeRef.child("questions/${qId}/chats").push().set(message.toJson())
+    .then((value) => "Posted")
     .onError((error, stackTrace) => "#error: $error \n $stackTrace")
     ;
   }

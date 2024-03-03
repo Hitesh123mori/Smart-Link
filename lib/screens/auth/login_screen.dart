@@ -98,19 +98,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: mq.height * 0.1,
                           ),
                           Image.asset(
-                            "assets/images/CampusQ.png",
-                            height: 250,
-                            width: 250,
-                          ),
-                          SizedBox(
-                            height: mq.height * 0.003,
-                          ),
-                          Text(
-                            "CampusQ",
-                            style: TextStyle(
-                                color: AppColors.theme['primaryTextColor'],
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold),
+                            "assets/images/SL (1).png",
+                            height: 350,
+                            width: 350,
                           ),
                           SizedBox(
                             height: mq.height * 0.003,

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ingenious_5/apis/FirebaseAPIs.dart';
+import 'package:ingenious_5/apis/FirebaseDatabaseAPIs/QuestionAPIs.dart';
+import 'package:ingenious_5/models/question_model/Question.dart';
+import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/widgets/text_field/question_field.dart';
 
@@ -39,81 +44,105 @@ class _AddQuesionState extends State<AddQuesion> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          backgroundColor: AppColors.theme['backgroundColor'],
-          appBar: AppBar(
-            actions: [
+    return Consumer<AppUserProvider>(
+        builder: (context, value, child){
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                backgroundColor: AppColors.theme['backgroundColor'],
+                appBar: AppBar(
+                  actions: [
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Container(
-                  height: 40,
-                  width: 100,
-                  child: Center(
-                      child: Text(
-                        "Post",
-                        style: TextStyle(
-                          color: isButtonEnabled
-                              ? AppColors.theme['backgroundColor']
-                              : AppColors.theme['primaryColor'],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: InkWell(
+                        onTap: (){
+                          if(isButtonEnabled){
+                            Question q = Question(
+                              qID: FirebaseAPIs.uuid.v1(),
+                                text: _questionController.text,
+                                domain: [],
+                                userId: value.user!.userId,
+                                userName: value.user!.name,
+                                userType: value.user!.type,
+                                createTime: DateTime.now().millisecondsSinceEpoch.toString(),
+                              vote: 0
+
+                            );
+                            QuestionAPIs.postQuestion(q);
+
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Container(
+                          height: 40,
+                          width: 100,
+                          child: Center(
+                              child: Text(
+                                "Post",
+                                style: TextStyle(
+                                  color: isButtonEnabled
+                                      ? AppColors.theme['backgroundColor']
+                                      : AppColors.theme['primaryColor'],
+                                ),
+                              )),
+                          decoration: BoxDecoration(
+                            color: isButtonEnabled
+                                ? AppColors.theme['fontColor'].withOpacity(0.9)
+                                : AppColors.theme['fontColor'],
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
-                      )),
-                  decoration: BoxDecoration(
-                    color: isButtonEnabled
-                        ? AppColors.theme['fontColor'].withOpacity(0.9)
-                        : AppColors.theme['fontColor'],
-                    borderRadius: BorderRadius.circular(20),
+                      ),
+                    )
+
+                  ],
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.keyboard_arrow_left_outlined,
+                      size: 32,
+                      color: AppColors.theme['backgroundColor'],
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  centerTitle: true,
+                  backgroundColor: AppColors.theme['primaryColor'],
+                  title: Text(
+                    "Ask Question",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.theme['backgroundColor'],
+                        fontSize: 20),
                   ),
                 ),
-              )
-
-            ],
-            leading: IconButton(
-              icon: Icon(
-                Icons.keyboard_arrow_left_outlined,
-                size: 32,
-                color: AppColors.theme['backgroundColor'],
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            centerTitle: true,
-            backgroundColor: AppColors.theme['primaryColor'],
-            title: Text(
-              "Ask Question",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.theme['backgroundColor'],
-                  fontSize: 20),
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Question",
-                    style: TextStyle(
-                      color: AppColors.theme['fontColor'],
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Question",
+                          style: TextStyle(
+                            color: AppColors.theme['fontColor'],
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        QuestionField(controller: _questionController,),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  QuestionField(controller: _questionController,),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      ),
+          );
+        }
     );
   }
 }

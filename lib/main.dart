@@ -4,6 +4,7 @@ import 'package:ingenious_5/apis/FireStoreAPIs/InterestAPIs.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
 import 'package:ingenious_5/screens/Institute/home_screen_institute.dart';
 import 'package:ingenious_5/screens/Institute/home_tab_institute.dart';
+import 'package:ingenious_5/screens/onboard_screen/onboarding_screen.dart';
 import 'package:ingenious_5/screens/onboard_screen/splash_screen.dart';
 import 'package:ingenious_5/screens/student/home_tabs_student.dart';
 import 'package:provider/provider.dart';
@@ -36,10 +37,11 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: LoginScreen(),
+      // home: LoginScreen(),2
       // home: SplashScreen(),
-      home: HomeTabsStudents(),
-      // home: HomeTabsInstitute(),
+      // home: HomeTabsStudents(),
+      // home: HomeTabsInstitute(),,
+      home:OnboardingScreen(),
     );
   }
 }
