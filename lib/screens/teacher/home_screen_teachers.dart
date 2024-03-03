@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../apis/FirebaseAPIs.dart';
-import '../../main.dart';
-import '../../models/question_model/Question.dart';
-import '../../providers/CurrentUser.dart';
-import '../../transitions/left_right.dart';
 import '../../utils/colors.dart';
 import '../../utils/widgets/student/question_card.dart';
 import '../student/add_question.dart';
