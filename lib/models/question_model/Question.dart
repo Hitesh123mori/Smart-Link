@@ -39,6 +39,7 @@ class Question {
     if (json['answer'] != null) {
       chat = [];
       json['answer'].forEach((k, v) {
+        print("#v: $v");
         chat?.add(DoubtMessage.fromJson(v));
       });
     }
