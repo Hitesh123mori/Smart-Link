@@ -6,6 +6,7 @@ import 'package:ingenious_5/apis/FirebaseDatabaseAPIs/QuestionAPIs.dart';
 import 'package:ingenious_5/models/question_model/Question.dart';
 import 'package:ingenious_5/models/user_model/AppUser.dart';
 import 'package:ingenious_5/providers/CurrentUser.dart';
+import 'package:ingenious_5/utils/helper_functions/date_formate.dart';
 import 'package:ingenious_5/utils/widgets/message_card.dart';
 import 'package:ingenious_5/utils/widgets/student/question_card.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,7 @@ class _ChatRoomState extends State<ChatRoom> {
                           dmList.add(dm);
                         });
                         dmList.sort((a, b) => a.time.compareTo(b.time));
-            
+
                         return SingleChildScrollView(
                           child: Column(
                             children: List<Widget>.generate(

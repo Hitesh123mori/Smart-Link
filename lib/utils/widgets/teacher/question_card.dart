@@ -53,7 +53,19 @@ class _QuestionCardState extends State<QuestionCard> {
                   title: Text(widget.question.userName!,style: TextStyle(
                     color: AppColors.theme['fontColor'],
                     fontWeight: FontWeight.bold,
+                  
+                  
                   ),),
+                  
+                  trailing: Chip(
+                    label: Text((widget.question.isGlobal ?? true) ? "Open": "Closed"),
+                    backgroundColor: (widget.question.isGlobal ?? true)
+                        ? AppColors.theme['secondaryColor']
+                        : Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20), // Adjust the value to change the roundness
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
