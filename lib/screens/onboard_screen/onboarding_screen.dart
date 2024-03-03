@@ -104,16 +104,80 @@ class _IntroState extends State<OnboardingScreen> {
                 title: "",
               ),
               PageViewModel(
-                title: "Screen 2",
-                // image: Transform.scale(scale:2,child: Image.asset('')),
-                body: "Introduction Screen 2",
-                // footer: Container(color: Colors.white,height: 600,width: 200,),
+                bodyWidget: Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: CircleAvatar(
+                            radius: 150,
+                            backgroundColor: AppColors.theme['secondaryColor']
+                                .withOpacity(0.2),
+                            child: Image.asset("assets/images/onboar2.png")),
+                      ),
+                      SizedBox(height: 60,),
+                      Text("Discuss: Solve Together",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "Join discussions, ",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "find solutions from community.",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                title: "",
               ),
               PageViewModel(
-                title: "Screen 3",
-                // image: Transform.scale(scale:2,child: Image.asset('')),
-                body: "Introduction Screen 3",
-                // footer: Container(color: Colors.white,height: 600,width: 200,),
+                bodyWidget: Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: CircleAvatar(
+                            radius: 150,
+                            backgroundColor: AppColors.theme['secondaryColor']
+                                .withOpacity(0.2),
+                            child: Image.asset("assets/images/onboard3.png")),
+                      ),
+                      SizedBox(height: 60,),
+                      Text("Connect: Unite Globally",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "Bridge gaps, connect worldwide",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "know new perspectives.",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                title: "",
               ),
               PageViewModel(
                 title: "Screen 4",
