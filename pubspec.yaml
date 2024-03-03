@@ -38,10 +38,10 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   pinput: ^4.0.0
 
-
+  image_picker: ^1.0.7
   firebase_messaging:
   cloud_firestore:
-  image_picker:
+
   firebase_storage:
   firebase_database: ^10.4.7
 
