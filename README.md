@@ -1,16 +1,10 @@
-# ingenious_5
+# 🔗 SmartLink - Project Demo
 
-A new Flutter project.
+**SmartLink** is a smart connectivity solution designed to streamline your digital interactions.
 
-## Getting Started
+🎥 **Watch the Demo Video**  
+See how SmartLink works and explore its capabilities:
 
-This project is a starting point for a Flutter application.
+🔗 [Video Link](https://youtu.be/iiCiRZWN5UU?feature=shared)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
